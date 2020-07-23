@@ -49,6 +49,7 @@ class Product(models.Model):
 
 
 class Contact(models.Model):
-    contact_name = models.CharField(max_length=50)
+    contact_name = models.CharField(max_length=100)
     email_address = models.EmailField()
+    subject = models.CharField(max_length=100)
     message = models.TextField()

@@ -65,7 +65,7 @@ def home_view(request, newsletter_message=None):
         username = None
     categories = Category.objects.all()
     return render(request,
-                  'shop/product/home.html',
+                  'shop/product/home_new.html',
                   {'categories': categories,
                    'username': username,
                    'newsletter_response': newsletter_message})
@@ -95,20 +95,18 @@ def search_view(request):
 
 def contact_view(request):
     if request.method == 'GET':
-        return render(request, 'shop/contact.html', {})
+        return render(request, 'shop/product/contact.html', {})
     elif request.method == 'POST':
         contact_form = ContactForm(request.POST)
 
         if contact_form.is_valid():
             contact_form.save()
-            return render(request, 'shop/contact.html',
+            return render(request, 'shop/product/contact.html',
                           {'message': 'Information saved an agent will contact you shortly'})
         else:
-            return render(request, 'shop/contact.html',
-                          {'message': contact_form.errors.values()})
+            return render(request, 'shop/product/contact.html',
+                          {'form': contact_form})
 
 
 def dummy_view(request):
-    return render(request,
-                  'shop/product/home_new.html',
-                  {})
+    return render(request, 'shop/product/contact.html', {})
