@@ -1,0 +1,197 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>
+        {% block title %} {% endblock %}
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Google Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,400,700">
+    <link rel="stylesheet" href="{% static 'resources/fonts/icomoon/style.css' %}">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'resources/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'resources/css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'resources/css/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'resources/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'resources/css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'resources/css/aos.css' %}">
+    <link rel="stylesheet" href="{% static 'resources/css/style.css' %}">
+
+</head>
+<body>
+<div class="site-wrap">
+    <header class="site-navbar" role="banner">
+        <div class="site-navbar-top">
+            <div class="container">
+                <div class="row align-items-center">
+
+                    <div class="col-6 col-md-4 order-2 order-md-1 site-search-icon text-left">
+                        <form action="" class="site-block-top-search">
+                            <span class="icon icon-search2"></span>
+                            <input type="text" class="form-control border-0" placeholder="Search">
+                        </form>
+                    </div>
+
+                    <div class="col-12 mb-3 mb-md-0 col-md-4 order-1 order-md-2 text-center">
+                        <div class="site-logo">
+                            <a href="/" class="js-logo-clone">Neue Art Shop</a>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-md-4 order-3 order-md-3 text-right">
+                        <div class="site-top-icons">
+                            <ul>
+                                <li>
+                                    {% if username %}
+                                        <div class="dropdown show">
+                                            <a class="" href="#" role="button"
+                                               id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                                               aria-expanded="false" style="font-size: 18px">
+                                                {{ username }} <i class="fa fa-angle-down"></i>
+                                            </a>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                <a href="/orders/history/" class="dropdown-item">
+                                                    Purchase History
+                                                </a>
+                                                <form method="post" action="{% url 'account_logout' %}">
+                                                    {% csrf_token %}
+                                                    {% if redirect_field_value %}
+                                                        <input type="hidden" name="{{ redirect_field_name }}"
+                                                               value="{{ redirect_field_value }}"/>
+                                                    {% endif %}
+                                                    <button class="dropdown-item" type="submit" style="color: #868995">
+                                                        Logout</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    {% else %}
+                                        <a href="/accounts/login/">
+                                            <span class="icon icon-person"></span>
+                                        </a>
+                                    {% endif %}
+                                </li>
+                                {% with total_items=cart|length %}
+                                    {% if total_items > 0 %}
+                                        <li>
+                                            <a href="{% url "cart:cart_detail" %}" class="site-cart">
+                                                <span class="icon icon-shopping_cart"></span>
+                                                <span class="count">{{ total_items }}</span>
+                                            </a>
+                                        </li>
+                                    {% else %}
+                                        <li>
+                                            <a href="#" class="site-cart">
+                                                <span class="icon icon-shopping_cart"></span>
+                                                <span class="count">{{ total_items }}</span>
+                                            </a>
+                                        </li>
+                                    {% endif %}
+
+                                {% endwith %}
+                                <li class="d-inline-block d-md-none ml-md-0">
+                                    <a href="#" class="site-menu-toggle js-menu-toggle">
+                                        <span class="icon-menu"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <nav class="site-navigation text-right text-md-center" role="navigation">
+            <div class="container">
+                <ul class="site-menu js-clone-nav d-none d-md-block">
+                    <!-- NAVBAR Items-->
+                    {% block navbar %}
+
+                    {% endblock %}
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    {% block content %}
+    {% endblock %}
+
+    <footer class="site-footer border-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3 class="footer-heading mb-4">Navigations</h3>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <ul class="list-unstyled">
+                                <li><a href="/">Gallery</a></li>
+                                <li><a href="/#about">About Us</a></li>
+                                <li><a href="#">Contact</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <ul class="list-unstyled">
+                                <li><a href="#">Shopping cart</a></li>
+                                <li><a href="/#testimonial">Testimonials</a></li>
+                                <li><a href="#">Artists</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <ul class="list-unstyled">
+
+                                <li><a href="">Shipping Fees</a></li>
+                                <li><a href="#">Terms and Conditions</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="block-5 mb-5">
+                        <h3 class="footer-heading mb-4">Contact Info</h3>
+                        <ul class="list-unstyled">
+                            <li class="address">203 Fake St. Grand Avenue, Maitama, Abuja, Nigeria</li>
+                            <li class="phone"><a href="tel://23923929210">+2 392 3929 210</a></li>
+                            <li class="email">help@neue-art-shop.com</li>
+                        </ul>
+                    </div>
+
+                    <div class="block-7">
+
+                        <form action="/newsletter/add/" method="post">
+                            {% csrf_token %}
+                            <label for="email_subscribe" class="footer-heading">
+                                Subscribe to our newsletter
+                            </label>
+                            <div class="form-group">
+                                <input type="text" class="form-control py-4" id="email_subscribe"
+                                       name="receive_email" placeholder="Email">
+                                <input type="submit" class="btn btn-sm btn-primary" value="Send">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<!--  JAVASCRIPT FILES -->
+<script src="{% static 'resources/js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'resources/js/jquery-ui.js' %}"></script>
+<script src="{% static 'resources/js/popper.min.js' %}"></script>
+<script src="{% static 'resources/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'resources/js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'resources/js/jquery.magnific-popup.min.js' %}"></script>
+<script src="{% static 'resources/js/aos.js' %}"></script>
+<script src="{% static 'resources/js/main.js' %}"></script>
+
+</body>
+</html>

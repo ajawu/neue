@@ -1,0 +1,250 @@
+{% extends "shop/product/base.html" %}
+
+{% load static %}
+
+{% block title %}
+    Ogani | Home
+{% endblock %}
+
+{% block content %}
+    <!-- Hero Section Begin -->
+    <section class="hero">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="hero__categories">
+                        <div class="hero__categories__all">
+                            <i class="fa fa-bars"></i>
+                            <span>All departments</span>
+                        </div>
+                        <ul>
+                            <li><a href="/products/">All Products</a></li>
+                            {% for c in categories %}
+                                <li {% if category.slug == c.slug %}class="selected"{% endif %}>
+                                    <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="hero__search">
+                        <div class="hero__search__form">
+                            <form action="/search" method="get">
+                                <input type="text" placeholder="What do yo u need?" name="keyword">
+                                <button type="submit" class="site-btn">SEARCH</button>
+                            </form>
+                        </div>
+                        <div class="hero__search__phone">
+                            <div class="hero__search__phone__icon">
+                                <i class="fa fa-phone"></i>
+                            </div>
+                            <div class="hero__search__phone__text">
+                                <h5>+234 8156227194</h5>
+                                <span>support 24/7 time</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hero__item set-bg" data-setbg="{% static 'img/hero/banner.jpg' %}">
+                        <div class="hero__text">
+                            <span>FRUIT FRESH</span>
+                            <h2>Vegetable <br />100% Organic</h2>
+                            <p>Free Pickup and Delivery Available</p>
+                            <a href="/vegetables/" class="primary-btn">SHOP NOW</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Hero Section End -->
+
+    <!-- Categories Section Begin -->
+    <section class="categories">
+        <div class="container">
+            <div class="row">
+                <div class="categories__slider owl-carousel">
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="{% static 'img/categories/cat-1.jpg' %}">
+                            <h5><a href="/fruits-nuts/">Fresh Fruit</a></h5>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="{% static 'img/categories/cat-2.jpg' %}">
+                            <h5><a href="/fruits-nuts/">Dried Fruit</a></h5>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="{% static 'img/categories/cat-3.jpg' %}">
+                            <h5><a href="/vegetables/">Vegetables</a></h5>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="{% static 'img/categories/cat-4.jpg' %}">
+                            <h5><a href="/drinks-beverages/">Fruit Drinks</a></h5>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="{% static 'img/categories/cat-5.jpg' %}">
+                            <h5><a href="/meat-meat-products/">Meat</a></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Categories Section End -->
+
+    <!-- Featured Section Begin -->
+    <section class="featured spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <h2>Featured Product</h2>
+                    </div>
+                    <div class="featured__controls">
+                        <ul>
+                            <li class="active" data-filter="*">All</li>
+                            <li data-filter=".fruits">Fruits</li>
+                            <li data-filter=".fresh-meat">Fresh Meat</li>
+                            <li data-filter=".vegetables">Vegetables</li>
+                            <li data-filter=".dairy">Dairy Products</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row featured__filter">
+                <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat">
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" data-setbg="{% static 'img/featured/feature-1.jpg' %}">
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="/15/beef/"><i class="fa fa-angle-double-right"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="featured__item__text">
+                            <h6><a href="/15/beef/">Beef</a></h6>
+                            <h5>₦1000.00</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mix fruits">
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" data-setbg="{% static 'img/featured/feature-2.jpg' %}">
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="/16/banana/"><i class="fa fa-angle-double-right"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="featured__item__text">
+                            <h6><a href="/16/banana/">Banana</a></h6>
+                            <h5>₦300.00</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables">
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" data-setbg="{% static 'img/featured/carrot.jpg' %}">
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="/17/carrot/"><i class="fa fa-angle-double-right"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="featured__item__text">
+                            <h6><a href="/17/carrot/">Carrot</a></h6>
+                            <h5>₦150.00</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables">
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" data-setbg="{% static 'img/featured/salad_bundle.jpg' %}"
+                             style="background-size: contain;">
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="/18/salad-bundle/"><i class="fa fa-angle-double-right"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="featured__item__text">
+                            <h6><a href="/18/salad-bundle/">Salad Lover's Bundle</a></h6>
+                            <h5>₦500.00</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mix dairy">
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" data-setbg="{% static 'img/featured/milk.jpeg' %}">
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="/19/milk/"><i class="fa fa-angle-double-right"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="featured__item__text">
+                            <h6><a href="/19/milk/">Milk</a></h6>
+                            <h5>₦1700.00</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mix dairy">
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" data-setbg="{% static 'img/featured/cheese.jpeg' %}">
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="/20/cheese/"><i class="fa fa-angle-double-right"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="featured__item__text">
+                            <h6><a href="/20/cheese/">Cheese</a></h6>
+                            <h5>₦600.00</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat">
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" data-setbg="{% static 'img/featured/chicken.jpeg' %}">
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="/2/chicken/"><i class="fa fa-angle-double-right"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="featured__item__text">
+                            <h6><a href="/21/chicken-lap/">Chicken</a></h6>
+                            <h5>₦2500.00</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mix fruits">
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" data-setbg="{% static 'img/featured/feature-8.jpg' %}">
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="/22/apples/"><i class="fa fa-angle-double-right"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="featured__item__text">
+                            <h6><a href="/22/apples/">Apples</a></h6>
+                            <h5>₦200.00</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Featured Section End -->
+
+    <!-- Banner Begin -->
+    <div class="banner">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="banner__pic">
+                        <a href="/fruits-nuts/">
+                            <img src="{% static 'img/banner/banner-1.jpg' %}" alt="summer-fruits-image">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="banner__pic">
+                        <a href="/fruits-nuts/">
+                            <img src="{% static 'img/banner/banner_rewrite.jpg' %}" alt="dried-fruits-and-drink-image">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Banner End -->
+{% endblock %}

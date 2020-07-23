@@ -1,0 +1,188 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="Ogani Home Page">
+        <meta name="keywords" content="Ogani">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="icon" type="image/png" href="{% static 'img/favicon.ico' %}"/>
+
+        <!-- Google Font -->
+        <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+
+        <!-- Css Styles -->
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">
+        <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" type="text/css">
+        <link rel="stylesheet" href="{% static 'css/elegant-icons.css' %}" type="text/css">
+        <link rel="stylesheet" href="{% static 'css/nice-select.css' %}" type="text/css">
+        <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}" type="text/css">
+        <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}" type="text/css">
+        <link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}" type="text/css">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+    </head>
+
+    <body>
+        <!-- Page Preloader -->
+{#        <div id="preloder">#}
+{#            <div class="loader"></div>#}
+{#        </div>#}
+
+        <!-- Humberger Begin -->
+        <div class="humberger__menu__overlay"></div>
+        <div class="humberger__menu__wrapper">
+            <div class="humberger__menu__logo">
+                <a href="#"><img src="{% static 'img/logo.png' %}" alt=""></a>
+            </div>
+            <nav class="humberger__menu__nav mobile-menu">
+                <ul>
+                    <li {% if products is None %} class="active" {% endif %}><a href="/">Home</a></li>
+                    <li {% if products %} class="active" {% endif %}><a href="/products">Shop</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div id="mobile-menu-wrap"></div>
+        </div>
+        <!-- Humberger End -->
+
+        <!-- Header Section Begin -->
+        <header class="header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="header__logo">
+                            <a href="/"><img src="{% static 'img/logo.png' %}" alt="Logo"></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <nav class="header__menu">
+                            <ul>
+                                <li {% if products is None %} class="active" {% endif %}><a href="/">Home</a></li>
+                                <li {% if products %} class="active" {% endif %} ><a href="/products">Shop</a></li>
+                                <li><a href="/contact">Contact</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="header__cart">
+                            <ul>
+                                {% with total_items=cart|length %}
+                                    {% if total_items > 0 %}
+                                        <li>
+                                            <a href="{% url "cart:cart_detail" %}">
+                                                <i class="fa fa-shopping-bag"></i>
+                                                <span>{{ total_items }}</span>
+                                            </a>
+                                        </li>
+                                    {% else %}
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa fa-shopping-bag"></i>
+                                                <span>{{ total_items }}</span>
+                                            </a>
+                                        </li>
+                                    {% endif %}
+
+                                {% endwith %}
+                            </ul>
+                            <div class="header__top__right__auth">
+                                {% if username %}
+                                    <div class="dropdown show">
+                                        <a class="btn dropdown-toggle" href="#" role="button"
+                                         id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                                         aria-expanded="false">
+                                        <i class="fa fa-user"></i> {{ username }}
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            <a href="/orders/history/" style="text-align: center; font-size: 1rem">
+                                                Purchase History
+                                            </a>
+                                            <form method="post" action="{% url 'account_logout' %}">
+                                              {% csrf_token %}
+                                              {% if redirect_field_value %}
+                                                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                                              {% endif %}
+                                              <button class="dropdown-item" type="submit">Logout</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <a href="/accounts/login/"><i class="fa fa-user"></i> Login</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="humberger__open">
+                    <i class="fa fa-bars"></i>
+                </div>
+            </div>
+        </header>
+        <!-- Header Section End -->
+        {% block content %}
+        {% endblock %}
+        <!-- Footer Section Begin -->
+        <footer class="footer spad">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="footer__about">
+                            <div class="footer__about__logo">
+                                <a href="home.html"><img src="{% static 'img/logo.png' %}" alt=""></a>
+                            </div>
+                            <ul>
+                                <li>Address: 25B, Admiralty Road, <br> Festac, Lagos</li>
+                                <li>Phone: +234 709 261 8445</li>
+                                <li>Email: hello@ogani.comm</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
+                        <div class="footer__widget">
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12">
+                        <div class="footer__widget">
+                            <h6>Join Our Newsletter Now</h6>
+                            <p>Get E-mail updates about our latest shop and special offers.</p>
+                            {% if newsletter_response %}
+                                <p style="color: #dd2222">{{ newsletter_response }}</p>
+                            {% endif %}
+                            <form action="/newsletter/add/" method="post">
+                                {% csrf_token %}
+                                <input type="text" placeholder="Enter your mail" name="email_address">
+                                <input type="hidden" name="receive_email" value="true">
+                                <button type="submit" class="site-btn">Subscribe</button>
+                            </form>
+                            <div class="footer__widget__social">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-instagram"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Footer Section End -->
+
+        <!-- Js Plugins -->
+        <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+                integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+                crossorigin="anonymous"></script>
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'js/jquery.nice-select.min.js' %}"></script>
+        <script src="{% static 'js/jquery-ui.min.js' %}"></script>
+        <script src="{% static 'js/jquery.slicknav.js' %}"></script>
+        <script src="{% static 'js/mixitup.min.js' %}"></script>
+        <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+        <script src="{% static 'js/main.js' %}"></script>
+
+        {% block script %}
+        {% endblock %}
+    </body>
+
+</html>

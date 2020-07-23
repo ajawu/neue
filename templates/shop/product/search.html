@@ -1,0 +1,105 @@
+{% extends "shop/product/base.html" %}
+
+{% load static %}
+
+{% block title %}
+  Ogani | Search
+{% endblock %}
+
+{% block content %}
+    <!-- Hero Section Begin -->
+    <section class="hero hero-normal">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-8">
+                    <div class="hero__search">
+                        <div class="hero__search__form m-r-10">
+                            <form action="#">
+                                <input type="text" placeholder="What do you need?" value="{{ search_phrase }}">
+                                <button type="submit" class="site-btn">SEARCH</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Hero Section End -->
+
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" data-setbg="{% static 'img/breadcrumb.jpg' %}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>Ogani Search</h2>
+                        <div class="breadcrumb__option">
+                            <a href="/">Home</a>
+                            <span>Search</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Product Section Begin -->
+    <section class="product spad">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="filter__item">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-5">
+                                <div class="filter__sort">
+                                    <span>Sort By</span>
+                                    <select>
+                                        <option value="0">Name</option>
+                                        <option value="0">Price</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                <div class="filter__found">
+                                    <h6><span>{{ products | length }}</span> Products found</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        {% for product in products %}
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
+                                        <ul class="product__item__pic__hover">
+                                            <li>
+                                                <a href="{{ product.get_absolute_url }}">
+                                                    <i class="fa fa-angle-double-right"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <h6><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h6>
+                                        <h5>₦{{ product.price }}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="product__pagination">
+                        {% for page_number in page_numbers %}
+                            <a href="/products/?page={{ page_number }}"
+                                    {% if page_number == active_page %}class="active-page-number"{% endif %}>
+                                {{ page_number }}
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Product Section End -->
+{% endblock %}

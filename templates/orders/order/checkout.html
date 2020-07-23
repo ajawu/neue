@@ -1,0 +1,158 @@
+{% extends "shop/product/base.html" %}
+
+{% load static %}
+
+{% block title %}
+    Ogani | Checkout
+{% endblock %}
+
+{% block content %}
+    <!-- Hero Section Begin -->
+    <section class="hero hero-normal">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-8">
+                    <div class="hero__search">
+                        <div class="hero__search__form m-r-10">
+                            <form action="/search" method="get">
+                                <input type="text" placeholder="What do yo u need?" name="keyword">
+                                <button type="submit" class="site-btn">SEARCH</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Hero Section End -->
+
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" data-setbg="{% static 'img/breadcrumb.jpg' %}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>Checkout</h2>
+                        <div class="breadcrumb__option">
+                            <a href="/">Home</a>
+                            <span>Checkout</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+        <!-- Checkout Section Begin -->
+    <section class="checkout spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h6><span class="icon_tag_alt"></span> Have a coupon? <a href="/cart/">Click here</a> to enter your code
+                    </h6>
+                </div>
+            </div>
+            <div class="checkout__form">
+                <p class="error-panel" style="display: none"></p>
+                <h4>Billing Details</h4>
+                <form data-url="/orders/create/" method="POST" id="checkout-form">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-6">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>Fist Name<span>*</span></p>
+                                        <input type="text" name="first_name" required id="id_first_name" maxlength="50"
+                                        value="{{ address.first_name }}">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>Last Name<span>*</span></p>
+                                        <input type="text" name="last_name" required id="id_last_name" maxlength="50"
+                                        value="{{ address.last_name }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="checkout__input">
+                                <p>Address<span>*</span></p>
+                                <input type="text" placeholder="Street Address" class="checkout__input__add"
+                                       name="street_address" required id="id_street" value="{{ address.street_name }}">
+                                <input type="text" placeholder="Apartment, suite, unit etc (optional)"
+                                       name="apartment_no" required id="id_apartment_no" value="{{ address.house_no }}">
+                            </div>
+                            <div class="checkout__input">
+                                <p>Town/City<span>*</span></p>
+                                <input type="text" name="city_town" required id="id_city_town" maxlength="50"
+                                value="{{ address.town }}">
+                            </div>
+                            <div class="checkout__input">
+                                <p>State<span>*</span></p>
+                                <input type="text" name="state" required id="id_state" maxlength="15" value="{{ address.state }}">
+                            </div>
+                            <div class="checkout__input">
+                                <p>Postcode / ZIP<span>*</span></p>
+                                <input type="text" name="post_zip" required id="id_post_zip" maxlength="10"
+                                       value="{{ address.post_code }}">
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>Phone<span>*</span></p>
+                                        <input type="number" name="phone_number" required id="id_phone_number"
+                                               maxlength="11" value="{{ address.phone }}">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>Email<span>*</span></p>
+                                        <input type="email" name="email" required id="id_email" maxlength="254"
+                                        value="{{ address.email }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="checkout__input">
+                                <p>Order notes</p>
+                                <input type="text" name="order_notes" required id="id_notes"
+                                    placeholder="Notes about your order, e.g. special notes for delivery."  >
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="checkout__order">
+                                <h4>Your Order</h4>
+                                <div class="checkout__order__products">Products <span>Total</span></div>
+                                <ul>
+                                    {% for item in cart %}
+                                        <li>
+                                        {{ item.quantity }}x {{ item.product.name }}
+                                        <span>₦{{ item.total_price|floatformat:2 }}</span>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                                <div class="checkout__order__subtotal">
+                                    Subtotal <span>₦{{ cart.get_total_price|floatformat:2 }}</span>
+                                </div>
+                                {% if cart.coupon %}
+                                    <div class="checkout__order__total" style="border-bottom: 1px solid #e1e1e1;">
+                                        Discount <span>- ₦{{ cart.get_discount|floatformat:2 }}</span>
+                                    </div>
+                                {% endif %}
+                                <div class="checkout__order__total">
+                                    Total <span>{{ cart.get_total_price_after_discount|floatformat:2 }}</span>
+                                </div>
+                                <button type="submit" class="site-btn" id="submit-btn">PLACE ORDER</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block script %}
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+    <script src="{% static 'js/submit_checkout.js' %}"></script>
+{% endblock %}
