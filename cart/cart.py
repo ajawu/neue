@@ -53,7 +53,7 @@ class Cart(object):
             self.cart[product_id] = {'quantity': 0,
                                      'price': str(product.price)}
 
-        self.cart[product_id]['quantity'] = quantity
+        self.cart[product_id]['quantity'] = 1
         self.save()
 
     def save(self):

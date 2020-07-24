@@ -112,7 +112,7 @@ def order_history(request):
                               'username': username})
 
         return render(request,
-                      'orders/order/purchase_history.html',
+                      'orders/order/order_history.html',
                       {'items': items,
                        'total_amount': total})
     else:
