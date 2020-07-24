@@ -1,0 +1,77 @@
+{% extends "shop/base.html" %}
+
+{% load static %}
+
+{% block title %}
+    Neue Art Shop &mdash; Art for everyone
+{% endblock %}
+
+{% block navbar %}
+    <li><a href="/">Home</a></li>
+    <li><a href="/#about">About</a></li>
+    <li><a href="/gallery/">Gallery</a></li>
+    <li class="has-children">
+        <a href="#">Collections</a>
+        <ul class="dropdown">
+            {% for c in categories %}
+                <li>
+                    <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </li>
+    <li><a href="/contact/">Contact</a></li>
+{% endblock %}
+
+{% block content %}
+    <div class="site-wrap">
+        <div class="bg-light py-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 mb-0"><a href="/">Home</a> <span class="mx-2 mb-0">/</span> <strong
+                            class="text-black">Delivery Fees and covered locations</strong></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="site-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="h2 mb-3 text-black text-center">
+                            General fees for delivery
+                        </h2>
+                    </div>
+                    <div class="col-md-12">
+                        <p>
+                            Jumia promises to provide you with the best-in-class shopping experience at every step of
+                            the way. To enhance your Jumia delivery experience, we have reviewed our shipping fees.
+                            To determine the applicable shipping fees for the items in your Cart:
+
+                            <ul>
+                                <li>Select Proceed to Checkout</li>
+                                <li>Select or add your Shipping address, Save and Continue</li>
+                                <li>Select your Shipping preference, shipping cost will be displayed</li>
+                            </ul>
+                            Shipping fees will vary depending on: Location, Size of the item and your Shipping
+                            preference (Door Delivery / Pick-up Station). See more details below:
+                        </p>
+                    </div>
+
+                    <div class="col-md-12">
+                        <h4 class="mb-2 text-black text-center">Covered locations</h4>
+                        <ul>
+                            <li>Group A: Lagos</li>
+                            <li>Group B: Federal Capital Territory, Rivers</li>
+                            <li>Group C: Delta, Edo, Ogun, Oyo</li>
+                            <li>Group D: Anambra, Cross River, Enugu, Kaduna, Kano, Kwara</li>
+                            <li>Group E: Abia, Adamawa, Akwa Ibom, Bauchi, Bayelsa, Benue, Borno, Ebonyi, Ekiti, Gombe,
+                                Imo, Jigawa, Katsina, Kebbi, Kogi, Nasarawa, Niger, Ondo, Osun, Plateau, Sokoto,
+                                Taraba, Yobe, Zamfara</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

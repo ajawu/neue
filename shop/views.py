@@ -114,3 +114,7 @@ def dummy_view(request):
 
 def terms_condition_view(request):
     return render(request, 'shop/product/terms-conditions.html', {})
+
+
+def delivery_view(request):
+    return render(request, 'shop/product/shipping.html', {})
