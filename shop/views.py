@@ -4,9 +4,10 @@ from .models import Category, Product
 from .forms import ContactForm
 from django.views.decorators.http import require_GET
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.contrib.auth import get_user_model
 
 
-def product_list(request, category_slug=None):
+def product_list(request, category_slug=None, artist_name=None):
     if request.user.is_authenticated:
         username = request.user.username
     else:
@@ -19,10 +20,23 @@ def product_list(request, category_slug=None):
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
         products_list = Product.objects.filter(category=category, available=True)
+    elif artist_name:
+        user_model = get_user_model()
+        owner = user_model.objects.get(username=artist_name)
+        products_list = Product.objects.filter(owner=owner, available=True)
     else:
         products_list = Product.objects.filter(available=True)
 
     paginator = Paginator(products_list, 9)
+
+    # Category length
+    category_breakdown = []
+    for c in categories:
+        category_breakdown.append({
+            'name': c.name,
+            'number': Product.objects.filter(category=c).count(),
+            'url': c.get_absolute_url()
+        })
 
     try:
         products = paginator.page(page_number)
@@ -32,11 +46,12 @@ def product_list(request, category_slug=None):
         products = paginator.page(paginator.num_pages)
 
     return render(request,
-                  'shop/product/product-list.html',
+                  'shop/product/product_list.html',
                   {'category': category,
                    'categories': categories,
                    'products': products,
                    'username': username,
+                   'category_breakdown': category_breakdown,
                    'page_numbers': [str(number) for number in range(1, paginator.num_pages + 1)],
                    'active_page': page_number})
 
@@ -65,7 +80,7 @@ def home_view(request, newsletter_message=None):
         username = None
     categories = Category.objects.all()
     return render(request,
-                  'shop/product/home_new.html',
+                  'shop/product/home.html',
                   {'categories': categories,
                    'username': username,
                    'newsletter_response': newsletter_message})
@@ -109,7 +124,7 @@ def contact_view(request):
 
 
 def dummy_view(request):
-    return render(request, 'shop/product/contact.html', {})
+    return render(request, 'shop/product/product_list.html', {})
 
 
 def terms_condition_view(request):

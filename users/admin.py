@@ -9,6 +9,9 @@ class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
     model = CustomUser
+    fieldsets = UserAdmin.fieldsets + (
+        (None, {'fields': ('state', 'country')}),
+    )
 
 
 admin.site.register(CustomUser, CustomUserAdmin)

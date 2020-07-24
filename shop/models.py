@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.conf import settings
 
 
 class Category(models.Model):
@@ -25,7 +26,7 @@ class Category(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=200, db_index=True)
     slug = models.SlugField(max_length=200, db_index=True)
-    description = models.CharField(blank=True, max_length=250)
+    description = models.TextField(blank=False)
     category = models.ForeignKey(Category,
                                  related_name='products',
                                  on_delete=models.CASCADE)
@@ -35,6 +36,7 @@ class Product(models.Model):
     available = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ('name',)

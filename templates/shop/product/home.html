@@ -1,250 +1,271 @@
-{% extends "shop/product/base.html" %}
+{% extends "shop/base.html" %}
 
 {% load static %}
 
 {% block title %}
-    Ogani | Home
+    Neue Art Shop &mdash; Art for everyone
+{% endblock %}
+
+{% block navbar %}
+    <li class="active"><a href="/">Home</a></li>
+    <li><a href="/#about">About</a></li>
+    <li><a href="/gallery/">Gallery</a></li>
+    <li class="has-children">
+        <a href="#">Collections</a>
+        <ul class="dropdown">
+            {% for c in categories %}
+                <li>
+                    <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </li>
+    <li><a href="/contact/">Contact</a></li>
 {% endblock %}
 
 {% block content %}
-    <!-- Hero Section Begin -->
-    <section class="hero">
+    <div class="site-blocks-cover main-back" data-aos="fade">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="hero__categories">
-                        <div class="hero__categories__all">
-                            <i class="fa fa-bars"></i>
-                            <span>All departments</span>
-                        </div>
-                        <ul>
-                            <li><a href="/products/">All Products</a></li>
-                            {% for c in categories %}
-                                <li {% if category.slug == c.slug %}class="selected"{% endif %}>
-                                    <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-9">
-                    <div class="hero__search">
-                        <div class="hero__search__form">
-                            <form action="/search" method="get">
-                                <input type="text" placeholder="What do yo u need?" name="keyword">
-                                <button type="submit" class="site-btn">SEARCH</button>
-                            </form>
-                        </div>
-                        <div class="hero__search__phone">
-                            <div class="hero__search__phone__icon">
-                                <i class="fa fa-phone"></i>
-                            </div>
-                            <div class="hero__search__phone__text">
-                                <h5>+234 8156227194</h5>
-                                <span>support 24/7 time</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="hero__item set-bg" data-setbg="{% static 'img/hero/banner.jpg' %}">
-                        <div class="hero__text">
-                            <span>FRUIT FRESH</span>
-                            <h2>Vegetable <br />100% Organic</h2>
-                            <p>Free Pickup and Delivery Available</p>
-                            <a href="/vegetables/" class="primary-btn">SHOP NOW</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Hero Section End -->
-
-    <!-- Categories Section Begin -->
-    <section class="categories">
-        <div class="container">
-            <div class="row">
-                <div class="categories__slider owl-carousel">
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="{% static 'img/categories/cat-1.jpg' %}">
-                            <h5><a href="/fruits-nuts/">Fresh Fruit</a></h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="{% static 'img/categories/cat-2.jpg' %}">
-                            <h5><a href="/fruits-nuts/">Dried Fruit</a></h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="{% static 'img/categories/cat-3.jpg' %}">
-                            <h5><a href="/vegetables/">Vegetables</a></h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="{% static 'img/categories/cat-4.jpg' %}">
-                            <h5><a href="/drinks-beverages/">Fruit Drinks</a></h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="{% static 'img/categories/cat-5.jpg' %}">
-                            <h5><a href="/meat-meat-products/">Meat</a></h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Categories Section End -->
-
-    <!-- Featured Section Begin -->
-    <section class="featured spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title">
-                        <h2>Featured Product</h2>
-                    </div>
-                    <div class="featured__controls">
-                        <ul>
-                            <li class="active" data-filter="*">All</li>
-                            <li data-filter=".fruits">Fruits</li>
-                            <li data-filter=".fresh-meat">Fresh Meat</li>
-                            <li data-filter=".vegetables">Vegetables</li>
-                            <li data-filter=".dairy">Dairy Products</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="row featured__filter">
-                <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="{% static 'img/featured/feature-1.jpg' %}">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="/15/beef/"><i class="fa fa-angle-double-right"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="/15/beef/">Beef</a></h6>
-                            <h5>₦1000.00</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix fruits">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="{% static 'img/featured/feature-2.jpg' %}">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="/16/banana/"><i class="fa fa-angle-double-right"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="/16/banana/">Banana</a></h6>
-                            <h5>₦300.00</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="{% static 'img/featured/carrot.jpg' %}">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="/17/carrot/"><i class="fa fa-angle-double-right"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="/17/carrot/">Carrot</a></h6>
-                            <h5>₦150.00</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="{% static 'img/featured/salad_bundle.jpg' %}"
-                             style="background-size: contain;">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="/18/salad-bundle/"><i class="fa fa-angle-double-right"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="/18/salad-bundle/">Salad Lover's Bundle</a></h6>
-                            <h5>₦500.00</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix dairy">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="{% static 'img/featured/milk.jpeg' %}">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="/19/milk/"><i class="fa fa-angle-double-right"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="/19/milk/">Milk</a></h6>
-                            <h5>₦1700.00</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix dairy">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="{% static 'img/featured/cheese.jpeg' %}">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="/20/cheese/"><i class="fa fa-angle-double-right"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="/20/cheese/">Cheese</a></h6>
-                            <h5>₦600.00</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="{% static 'img/featured/chicken.jpeg' %}">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="/2/chicken/"><i class="fa fa-angle-double-right"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="/21/chicken-lap/">Chicken</a></h6>
-                            <h5>₦2500.00</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix fruits">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="{% static 'img/featured/feature-8.jpg' %}">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="/22/apples/"><i class="fa fa-angle-double-right"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="/22/apples/">Apples</a></h6>
-                            <h5>₦200.00</h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Featured Section End -->
-
-    <!-- Banner Begin -->
-    <div class="banner">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="banner__pic">
-                        <a href="/fruits-nuts/">
-                            <img src="{% static 'img/banner/banner-1.jpg' %}" alt="summer-fruits-image">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="banner__pic">
-                        <a href="/fruits-nuts/">
-                            <img src="{% static 'img/banner/banner_rewrite.jpg' %}" alt="dried-fruits-and-drink-image">
-                        </a>
+            <div class="row align-items-start align-items-md-center justify-content-end">
+                <div class="col-md-5 text-center text-md-left pt-5 pt-md-0">
+                    <h1 class="mb-2">Finding the perfect art piece</h1>
+                    <div class="intro-text text-center text-md-left">
+                        <p class="mb-4">
+                            Finding art should be an enjoyable activity not a chore, and we strive to make it so
+                        </p>
+                        <p>
+                            <a href="#" class="btn btn-sm btn-primary">Shop Now</a>
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Banner End -->
+
+    <div class="site-section site-section-sm site-blocks-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-lg-4 d-lg-flex mb-4 mb-lg-0 pl-4" data-aos="fade-up" data-aos-delay="">
+                    <div class="icon mr-4 align-self-start">
+                        <span class="icon-truck"></span>
+                    </div>
+                    <div class="text">
+                        <h2 class="text-uppercase">Shipping within a week</h2>
+                        <p>All art pieces will be delivered in pristine condition within a week or less of payment</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 d-lg-flex mb-4 mb-lg-0 pl-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="icon mr-4 align-self-start">
+                        <span class="icon-refresh2"></span>
+                    </div>
+                    <div class="text">
+                        <h2 class="text-uppercase">Free Returns</h2>
+                        <p>There are no additional costs on returns.
+                            If it doesn't fit it can be returned. With no hidden fees, we promise</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 d-lg-flex mb-4 mb-lg-0 pl-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="icon mr-4 align-self-start">
+                        <span class="icon-help"></span>
+                    </div>
+                    <div class="text">
+                        <h2 class="text-uppercase">Customer Support</h2>
+                        <p>
+                            Our customer support team is always available to handle any complaints or enquiries.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="site-section block-8" id="about">
+        <div class="container">
+            <div class="row justify-content-center  mb-5">
+                <div class="col-md-7 site-section-heading text-center pt-4">
+                    <h2>About</h2>
+                </div>
+                <p class="long-text">
+                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
+                    sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+                    At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
+                    no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
+                    consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
+                    aliquyam erat, sed diam voluptua.
+                </p>
+            </div>
+            <div class="row align-items-center">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="site-section site-blocks-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="">
+                    <a class="block-2-item" href="#">
+                        <figure class="image">
+                            <img src="{% static 'resources/images/woman-smiling-clear.jpg' %}" alt="sculpture-woman-smiling"
+                                 class="img-fluid collection-image">
+                        </figure>
+                        <div class="text">
+                            <span class="text-uppercase">Collections</span>
+                            <h3>Sculptures</h3>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="100">
+                    <a class="block-2-item" href="#">
+                        <figure class="image">
+                            <img src="/static/resources/images/painting_home.jpeg" alt="painting-swing-sunset"
+                                 class="img-fluid collection-image">
+                        </figure>
+                        <div class="text">
+                            <span class="text-uppercase">Collections</span>
+                            <h3>Paintings</h3>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="200">
+                    <a class="block-2-item" href="#">
+                        <figure class="image collection-image">
+                            <img src="/static/resources/images/photography_landing.jpg" alt=""
+                                 class="img-fluid collection-image">
+                        </figure>
+                        <div class="text">
+                            <span class="text-uppercase">Collections</span>
+                            <h3>Photography</h3>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="site-section block-3 site-blocks-2 bg-light">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-7 site-section-heading text-center pt-4">
+                    <h2>Featured Products</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="nonloop-block-3 owl-carousel">
+                        <div class="item">
+                            <div class="block-4 text-center">
+                                <figure class="block-4-image">
+                                    <img src="/static/resources/images/painting_1_card.jpg"
+                                         alt="LAGO" class="img-fluid card-image">
+                                </figure>
+                                <div class="block-4-text p-4">
+                                    <h3><a href="#">Lago</a></h3>
+                                    <p class="mb-0">by <a href="#">Gaetano Ligrani</a></p>
+                                    <p class="text-primary font-weight-bold">$766</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="block-4 text-center">
+                                <figure class="block-4-image">
+                                    <img src="/static/resources/images/13495637_539-le-vase-bleu-copie.jpg"
+                                         alt="Image placeholder" class="img-fluid card-image">
+                                </figure>
+                                <div class="block-4-text p-4">
+                                    <h3><a href="#">le vase à anses bleu</a></h3>
+                                    <p class="mb-0">by <a href="#">Billy Renoir</a></p>
+                                    <p class="text-primary font-weight-bold">$459</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="block-4 text-center">
+                                <figure class="block-4-image">
+                                    <img src="/static/resources/images/violette.jpg" alt="Image placeholder"
+                                         class="img-fluid card-image">
+                                </figure>
+                                <div class="block-4-text p-4">
+                                    <h3><a href="#">Violette</a></h3>
+                                    <p class="mb-0">by <a href="#">Aleksandra Petkovic</a></p>
+                                    <p class="text-primary font-weight-bold">$150</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="block-4 text-center">
+                                <figure class="block-4-image">
+                                    <img src="/static/resources/images/emotional_creation.jpg"
+                                         alt="Image placeholder" class="img-fluid card-image">
+                                </figure>
+                                <div class="block-4-text p-4">
+                                    <h3><a href="#">The Emotional Creation</a></h3>
+                                    <p class="mb-0">by <a href="#">Carla Sá Fernandes</a></p>
+                                    <p class="text-primary font-weight-bold">$2641</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="block-4 text-center">
+                                <figure class="block-4-image">
+                                    <img src="/static/resources/images/juex.jpg" alt="Image placeholder"
+                                         class="img-fluid card-image">
+                                </figure>
+                                <div class="block-4-text p-4">
+                                    <h3><a href="#">Jeux Poisson Oeil</a></h3>
+                                    <p class="mb-0">by <a href="#">Mesrine</a></p>
+                                    <p class="text-primary font-weight-bold">$300</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="site-section block-8" id="testimonial">
+        <div class="container">
+            <div class="row justify-content-center  mb-5">
+                <div class="col-md-7 site-section-heading text-center pt-4">
+                    <h2>Testimonials</h2>
+                </div>
+            </div>
+            <div class="row align-items-center">
+                <div class="col">
+                    <p class="customer-quote">
+                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
+                        ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
+                        dolores et ea rebum.
+                    </p>
+                    <p class="avatar-container">
+                        <img src="/static/resources/images/avatar_woman.jpg" alt="Shannon Young">
+                        Shannon Young
+                    </p>
+                </div>
+                <div class="col">
+                    <p class="customer-quote">
+                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
+                        ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
+                        dolores et ea rebum.
+                    </p>
+                    <p class="avatar-container">
+                        <img src="/static/resources/images/avatar_elliot.jpg" alt="Isaac Elliott">
+                        Isaac Elliott
+                    </p>
+                </div>
+                <div class="col">
+                    <p class="customer-quote">
+                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
+                        ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
+                        dolores et ea rebum.
+                    </p>
+                    <p class="avatar-container">
+                        <img src="/static/resources/images/avatar_bradley.jpg" alt="Bradley Fox">
+                        Bradley Fox
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
