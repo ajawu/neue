@@ -97,18 +97,20 @@ def search_view(request):
         username = None
 
     search_phrase = request.GET.get('keyword')
+    categories = Category.objects.all()
     if search_phrase:
         matching_products = Product.objects.filter(name__contains=search_phrase)
         return render(request,
-                      'shop/product/search.html',
+                      'shop/product/search_result.html',
                       {'products': matching_products,
                        'username': username,
-                       'search_phrase': search_phrase})
+                       'search_phrase': search_phrase,
+                       'categories': categories})
     else:
-        # return reverse('shop:home_page')
         return render(request,
-                      'shop/product/search.html',
-                      {'username': username})
+                      'shop/product/search_result.html',
+                      {'username': username,
+                       'categories': categories})
 
 
 def contact_view(request):

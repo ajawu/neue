@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <title>
-        {% block title %} {% endblock %}
+        Neue Art Shop &mdash; Art for everyone
     </title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -65,7 +65,8 @@
                                                                value="{{ redirect_field_value }}"/>
                                                     {% endif %}
                                                     <button class="dropdown-item" type="submit" style="color: #868995">
-                                                        Logout</button>
+                                                        Logout
+                                                    </button>
                                                 </form>
                                             </div>
                                         </div>
@@ -99,16 +100,141 @@
             <div class="container">
                 <ul class="site-menu js-clone-nav d-none d-md-block">
                     <!-- NAVBAR Items-->
-                    {% block navbar %}
-
-                    {% endblock %}
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/#about">About</a></li>
+                    <li><a href="/gallery/">Gallery</a></li>
+                    <li class="has-children">
+                        <a href="#">Collections</a>
+                        <ul class="dropdown">
+                            {% for c in categories %}
+                                <li>
+                                    <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li><a href="/contact/">Contact</a></li>
                 </ul>
             </div>
         </nav>
     </header>
 
-    {% block content %}
-    {% endblock %}
+    <div class="site-wrap">
+        <div class="bg-light py-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 mb-0">
+                        <a href="/">Home</a>
+                        <span class="mx-2 mb-0">/</span>
+                        <strong class="text-black">Search</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="site-section">
+            <div class="container">
+
+                <div class="row mb-5">
+                    <div class="col-md-9 order-2">
+
+                        <div class="row">
+                            <div class="col-md-12 mb-5">
+                                <div class="float-md-left mb-4"><h2 class="text-black h5"></h2></div>
+                                <div class="d-flex">
+                                    <div class="dropdown mr-1 ml-md-auto">
+                                        <button type="button" class="btn btn-secondary btn-sm dropdown-toggle"
+                                                id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true"
+                                                aria-expanded="false">
+                                            Latest
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+                                            <a class="dropdown-item" href="#">Painting</a>
+                                            <a class="dropdown-item" href="#">Sculpture</a>
+                                            <a class="dropdown-item" href="#">Photograph</a>
+                                        </div>
+                                    </div>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-secondary btn-sm dropdown-toggle"
+                                                id="dropdownMenuReference" data-toggle="dropdown">Reference
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuReference">
+                                            <a class="dropdown-item" href="#">Relevance</a>
+                                            <a class="dropdown-item" href="#">Name, A to Z</a>
+                                            <a class="dropdown-item" href="#">Name, Z to A</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">Price, low to high</a>
+                                            <a class="dropdown-item" href="#">Price, high to low</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-5">
+                            {% for product in products %}
+                                <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
+                                    <div class="block-4 text-center border">
+                                        <figure class="block-4-image">
+                                            <a href="{{ product.get_absolute_url }}">
+                                                <img src="
+                                                        {% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}"
+                                                     alt="Image placeholder"
+                                                     class="img-fluid">
+                                            </a>
+                                        </figure>
+                                        <div class="block-4-text p-4">
+                                            <h3><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h3>
+                                            <p class="mb-0">by <a href="#">{{ product.owner }}</a></p>
+                                            <p class="text-primary font-weight-bold">₦ {{ product.price }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="row" data-aos="fade-up">
+                            <div class="col-md-12 text-center">
+                                <div class="site-block-27">
+                                    <ul>
+                                        <li><a href="/gallery/?page=1">&lt;</a></li>
+                                        {% if active_page %}
+                                            {% for page_number in page_numbers %}
+                                                <li {% if page_number == active_page %}class="active"{% endif %}>
+                                                    <a href="/gallery/?page={{ page_number }}">
+                                                        <span>{{ page_number }}</span>
+                                                    </a>
+                                                </li>
+                                            {% endfor %}
+                                        {% else %}
+                                            <li class="active">
+                                                <a href="/gallery/?page=1"><span>1</span></a>
+                                            </li>
+                                            {% for page_number in page_numbers %}
+                                                {% if page_number != '1' %}
+                                                    <li>
+                                                        <a href="/gallery/?page={{ page_number }}">
+                                                            <span>{{ page_number }}</span>
+                                                        </a>
+                                                    </li>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
+                                        <li><a href="#">&gt;</a></li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 order-1 mb-5 mb-md-0">
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
 
     <footer class="site-footer border-top">
         <div class="container">
