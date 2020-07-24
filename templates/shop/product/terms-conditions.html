@@ -1,0 +1,88 @@
+{% extends "shop/base.html" %}
+
+{% load static %}
+
+{% block title %}
+    Neue Art Shop &mdash; Art for everyone
+{% endblock %}
+
+{% block navbar %}
+    <li><a href="/">Home</a></li>
+    <li><a href="/#about">About</a></li>
+    <li><a href="/gallery/">Gallery</a></li>
+    <li class="has-children">
+        <a href="#">Collections</a>
+        <ul class="dropdown">
+            {% for c in categories %}
+                <li>
+                    <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </li>
+    <li><a href="/contact/">Contact</a></li>
+{% endblock %}
+
+{% block content %}
+    <div class="site-wrap">
+        <div class="bg-light py-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 mb-0"><a href="/">Home</a> <span class="mx-2 mb-0">/</span> <strong
+                            class="text-black">Terms of Use</strong></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="site-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="h2 mb-3 text-black text-center">
+                            General terms and conditions of use of Neue for Buyers
+                        </h2>
+                    </div>
+                    <div class="col-md-12">
+                        <ol>
+                            <li class="mb-3 text-black" style="font-size: 19px">
+                                <strong>Introduction</strong>
+                            </li>
+                            <p style="color: #69707f">
+                                Neue Art Shop ("we") operates an ecommerce platform consisting of a website
+                                ("marketplace"), together with supporting logistics and payment infrastructure,
+                                for the sale and purchase of art.
+                                These general terms and conditions shall apply to buyers and sellers on the marketplace and shall govern your use of the marketplace and related services.
+                                By using our marketplace, you accept these general terms and conditions in full. If you disagree with these general terms and conditions or any part of these general terms and conditions, you must not use our marketplace.
+                                If you use our marketplace in the course of a business or other organizational project, then by so doing you:
+                                <ul style="color: #69707f">
+                                    <li>confirm that you have obtained the necessary authority to agree to these general terms and conditions;</li>
+                                    <li>bind both yourself and the person, company or other legal entity that operates that business or organizational project, to these general terms and conditions; and</li>
+                                    <li>agree that "you" in these general terms and conditions shall reference both the individual user and the relevant person, company or legal entity unless the context requires otherwise.</li>
+                                </ul>
+                            </p>
+                            <li class="mb-3 text-black" style="font-size: 19px">
+                                <strong>Registration and account</strong>
+                            </li>
+                            <p>
+                              <ol style="color: #69707f">
+                                <li>You may not register with our marketplace if you are under 18 years of age (by using our marketplace or agreeing to these general terms and conditions, you warrant and represent to us that you are at least 18 years of age).</li>
+                                <li>You may register for an account with our marketplace by completing and submitting the registration form on our marketplace</li>
+                                <li>You represent and warrant that all information provided in the registration form is complete and accurate.</li>
+                                <li>
+                                    If you register for an account with our marketplace, you will be asked to provide an email address/user ID and password and you agree to:
+                                    <ul>
+                                        <li>keep your password confidential;</li>
+                                        <li>be responsible for any activity on our marketplace arising out of any failure to keep your password confidential, and that you may be held liable for any losses arising out of such a failure.</li>
+                                    </ul>
+                                </li>
+                            </ol>
+                            </p>
+                        </ol>
+                    </div>
+                    <div class="col-md-5 ml-auto">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

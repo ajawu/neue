@@ -110,3 +110,7 @@ def contact_view(request):
 
 def dummy_view(request):
     return render(request, 'shop/product/contact.html', {})
+
+
+def terms_condition_view(request):
+    return render(request, 'shop/product/terms-conditions.html', {})

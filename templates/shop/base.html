@@ -76,22 +76,12 @@
                                     {% endif %}
                                 </li>
                                 {% with total_items=cart|length %}
-                                    {% if total_items > 0 %}
-                                        <li>
-                                            <a href="{% url "cart:cart_detail" %}" class="site-cart">
-                                                <span class="icon icon-shopping_cart"></span>
-                                                <span class="count">{{ total_items }}</span>
-                                            </a>
-                                        </li>
-                                    {% else %}
-                                        <li>
-                                            <a href="#" class="site-cart">
-                                                <span class="icon icon-shopping_cart"></span>
-                                                <span class="count">{{ total_items }}</span>
-                                            </a>
-                                        </li>
-                                    {% endif %}
-
+                                    <li>
+                                        <a href="{% url "cart:cart_detail" %}" class="site-cart">
+                                            <span class="icon icon-shopping_cart"></span>
+                                            <span class="count">{{ total_items }}</span>
+                                        </a>
+                                    </li>
                                 {% endwith %}
                                 <li class="d-inline-block d-md-none ml-md-0">
                                     <a href="#" class="site-menu-toggle js-menu-toggle">
@@ -130,22 +120,21 @@
                         </div>
                         <div class="col-md-6 col-lg-4">
                             <ul class="list-unstyled">
-                                <li><a href="/">Gallery</a></li>
+                                <li><a href="/gallery">Gallery</a></li>
                                 <li><a href="/#about">About Us</a></li>
-                                <li><a href="#">Contact</a></li>
+                                <li><a href="/contact">Contact</a></li>
                             </ul>
                         </div>
                         <div class="col-md-6 col-lg-4">
                             <ul class="list-unstyled">
-                                <li><a href="#">Shopping cart</a></li>
+                                <li><a href="{% url "cart:cart_detail" %}">Shopping cart</a></li>
                                 <li><a href="/#testimonial">Testimonials</a></li>
                                 <li><a href="#">Artists</a></li>
                             </ul>
                         </div>
                         <div class="col-md-6 col-lg-4">
                             <ul class="list-unstyled">
-
-                                <li><a href="">Shipping Fees</a></li>
+                                <li><a href="#">Shipping Fees</a></li>
                                 <li><a href="#">Terms and Conditions</a></li>
                             </ul>
                         </div>
