@@ -46,7 +46,7 @@ def product_list(request, category_slug=None, artist_name=None):
         products = paginator.page(paginator.num_pages)
 
     return render(request,
-                  'shop/product/product_list.html',
+                  'shop/product/list.html',
                   {'category': category,
                    'categories': categories,
                    'products': products,
@@ -66,11 +66,14 @@ def product_detail(request, id, slug):
                                 available=True)
     cart_product_form = CartAddProductForm()
 
+    categories = Category.objects.all()
+
     return render(request,
-                  'shop/product/product-details.html',
+                  'shop/product/detail.html',
                   {'product': product,
                    'cart_product_form': cart_product_form,
-                   'username': username})
+                   'username': username,
+                   'categories': categories})
 
 
 def home_view(request, newsletter_message=None):
@@ -124,7 +127,7 @@ def contact_view(request):
 
 
 def dummy_view(request):
-    return render(request, 'shop/product/product_list.html', {})
+    return render(request, 'shop/product/detail.html', {})
 
 
 def terms_condition_view(request):

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect, JsonResponse
 from django.conf import settings
 from orders.models import Order, OrderItem
+from shop.models import Category
 from .tasks import payment_completed
 import requests
 from decimal import Decimal
@@ -47,5 +48,5 @@ def payment_process(request):
 
 
 def payment_done(request):
-    print(request.META.get('HTTP_REFERER'))
-    return render(request, 'payment/done.html')
+    categories = Category.objects.all()
+    return render(request, 'payment/done.html', {'categories': categories})

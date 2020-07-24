@@ -1,0 +1,86 @@
+{% extends "shop/base.html" %}
+
+{% load static %}
+
+{% block title %}
+    Neue Art Shop &mdash; Art for everyone
+{% endblock %}
+
+{% block navbar %}
+    <li><a href="/">Home</a></li>
+    <li><a href="/#about">About</a></li>
+    <li class="active"><a href="/gallery/">Gallery</a></li>
+    <li class="has-children">
+        <a href="#">Collections</a>
+        <ul class="dropdown">
+            {% for c in categories %}
+                <li>
+                    <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </li>
+    <li><a href="/contact/">Contact</a></li>
+{% endblock %}
+
+{% block content %}
+    <div class="site-wrap">
+        <div class="bg-light py-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 mb-0">
+                        <a href="/">Home</a>
+                        <span class="mx-2 mb-0">/</span>
+                        <a href="/gallery">Gallery</a>
+                        <span class="mx-2 mb-0">/</span>
+                        <strong class="text-black">{{ product.category }}</strong>
+                        <span class="mx-2 mb-0">/</span>
+                        <strong class="text-black">{{ product.name }}</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="site-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="{% if product.image %}{{ product.image.url }}{% else %}
+                             {% static "img/no_image.png" %}{% endif %}" alt="art-piece-image" class="img-fluid">
+                    </div>
+                    <div class="col-md-6">
+                        <h2 class="text-black">{{ product.name }}</h2>
+                        <p class="mb-4">{{ product.description|linebreaks }}</p>
+                        <p><strong class="text-primary h4">₦ {{ product.price }}</strong></p>
+                        <div class="mb-5">
+                            <form action="{% url "cart:cart_add" product.id %}" method="post">
+                                {% csrf_token %}
+    {#                            <div class="quantity" style="display: inline-block; margin-right: 10px;">#}
+    {#                                <div class="pro-qty">#}
+    {#                                    <input type="number" value=1 min=0 name="quantity" required id="id_quantity">#}
+    {#                                </div>#}
+    {#                            </div>#}
+                                <div class="input-group mb-3" style="max-width: 120px; display: none">
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
+                                    </div>
+                                    <input type="text" class="form-control text-center" value="1" name="quantity"
+                                           required id="id_quantity">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="override" value="False" required id="id_override">
+                                <button class="buy-now btn btn-sm btn-primary" type="submit">
+                                    Add To Cart
+                                </button>
+                                {# style="border: none; display: inline" #}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
