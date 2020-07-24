@@ -33,7 +33,12 @@
                     <div class="col-6 col-md-4 order-2 order-md-1 site-search-icon text-left">
                         <form action="/search" method="get" class="site-block-top-search">
                             <span class="icon icon-search2"></span>
-                            <input type="text" class="form-control border-0" value="{{ search_phrase }}" name="keyword">
+                            {% if search_phrase %}
+                                <input type="text" class="form-control border-0" value="{{ search_phrase }}"
+                                       name="keyword">
+                            {% else %}
+                                <input type="text" class="form-control border-0" name="keyword" placeholder="Search">
+                            {% endif %}
                         </form>
                     </div>
 

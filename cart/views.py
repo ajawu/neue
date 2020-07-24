@@ -39,7 +39,7 @@ def cart_detail(request):
                                                                    'override': True})
     coupon_apply_form = CouponApplyForm()
 
-    return render(request, 'cart/cart-details.html',
+    return render(request, 'cart/cart.html',
                            {'cart': cart,
                             'coupon_apply_form': coupon_apply_form,
                             'username': username})
