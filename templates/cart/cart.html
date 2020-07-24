@@ -40,7 +40,7 @@
         <div class="site-section">
             <div class="container">
                 <div class="row mb-5">
-                    <form class="col-md-12" method="post">
+                    <div class="col-md-12">
                         <div class="site-blocks-table">
                             <table class="table table-bordered">
                                 <thead>
@@ -64,14 +64,19 @@
                                                 <h2 class="h5 text-black">{{ product.name }}</h2>
                                             </td>
                                             <td>₦ {{ item.price }}</td>
-                                            <td><a href="#" class="btn btn-primary btn-sm">X</a></td>
+                                            <td>
+                                                <form action="{% url "cart:cart_remove" product.id %}" method="post">
+                                                    {% csrf_token %}
+                                                    <button type="submit" class="btn btn-primary btn-sm">X</button>
+                                                </form>
+                                            </td>
                                         </tr>
                                     {% endwith %}
                                 {% endfor %}
                                 </tbody>
                             </table>
                         </div>
-                    </form>
+                    </div>
                 </div>
 
                 <div class="row">
