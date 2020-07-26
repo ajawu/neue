@@ -84,7 +84,7 @@ def order_create(request):
             return JsonResponse({'message': 'invalid form input'}, status=400)
     else:
         return render(request,
-                      'orders/order/checkout.html',
+                      'orders/order/checkout_page.html',
                       {'cart': cart,
                        'username': username,
                        'address': address})

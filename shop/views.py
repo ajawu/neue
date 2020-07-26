@@ -129,7 +129,7 @@ def contact_view(request):
 
 
 def dummy_view(request):
-    return render(request, 'shop/product/detail.html', {})
+    return render(request, 'orders/order/checkout_page.html', {})
 
 
 def terms_condition_view(request):
