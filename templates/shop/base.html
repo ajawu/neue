@@ -158,15 +158,17 @@
                     </div>
 
                     <div class="block-7">
-
+                        {% if newsletter_response %}
+                            <p style="color: #dd2222">{{ newsletter_response }}</p>
+                        {% endif %}
                         <form action="/newsletter/add/" method="post">
                             {% csrf_token %}
                             <label for="email_subscribe" class="footer-heading">
                                 Subscribe to our newsletter
                             </label>
                             <div class="form-group">
-                                <input type="text" class="form-control py-4" id="email_subscribe"
-                                       name="receive_email" placeholder="Email">
+                                <input type="text" class="form-control py-4" id="id_email_address"
+                                       name="email_address" placeholder="Email">
                                 <input type="submit" class="btn btn-sm btn-primary" value="Send">
                             </div>
                         </form>
