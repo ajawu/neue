@@ -1,0 +1,117 @@
+{% extends "shop/base.html" %}
+
+{% load static %}
+
+{% block title %}
+    Neue Art Shop &mdash; Art for everyone
+{% endblock %}
+
+{% block navbar %}
+    <li><a href="/">Home</a></li>
+    <li><a href="/#about">About</a></li>
+    <li><a href="/products/">Gallery</a></li>
+    <li class="has-children">
+        <a href="#">Collections</a>
+        <ul class="dropdown">
+            {% for c in categories %}
+                <li>
+                    <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </li>
+    <li><a href="/contact/">Contact</a></li>
+{% endblock %}
+
+{% block content %}
+    <div class="site-wrap">
+        <div class="bg-light py-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 mb-0"><a href="/">Home</a> <span class="mx-2 mb-0">/</span> <strong
+                            class="text-black">Review</strong></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="site-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7 mb-5 mb-md-0">
+                        <h2 class="h3 mb-3 text-black">Review</h2>
+                        <form action="/reviews/create/{{ product.id }}/" method="post">
+                            {% csrf_token %}
+                            <div class="p-3 p-lg-5 border">
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <label for="id_review_title" class="text-black">
+                                            Review Title <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" class="form-control" name="review_title"
+                                               required id="id_review_title" placeholder="Title of the review">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                        <label for="id_review_score" class="text-black">Review Score<span
+                                                class="text-danger">*</span></label>
+                                        <input type="number" name="review_score" class="form-control"
+                                               required id="id_review_score" max=5 min=1 value=1>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="id_review_text" class="text-black">Review Text</label>
+                                    <textarea name="review_text" cols="30" rows="5" class="form-control" maxlength="200"
+                                               placeholder="Write your review here..." required id="id_review_text"></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <button class="btn btn-primary btn-lg py-3 btn-block" id="submit-btn" type="submit">
+                                        Save Review
+                                    </button>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="row mb-5">
+                            <div class="col-md-10">
+                                <h2 class="h3 mb-3 text-black">Product Details</h2>
+                                <div class="border" style="padding: 4rem 1.5rem">
+                                    <div style="text-align: left" class="mb-3">
+                                        <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}"
+                                                alt="product-image" class="review-product-image">
+                                    </div>
+
+                                    <div style="text-align: left" class="m-t-20">
+                                        <p class="product-text">
+                                            <span class="product-title">Name: </span>{{ product.name }}
+                                        </p>
+                                        <p class="product-text">
+                                            <span class="product-title">Average Rating: </span>
+                                            {% for rating in ratings_list  %}
+                                                {% if rating <= product.average_rating %}
+                                                    <span class="fa fa-star active-star star"></span>
+                                                {% else %}
+                                                    <span class="fa fa-star star"></span>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </p>
+                                        <p class="product-text">
+                                            <span class="product-title">Price: </span>
+                                            ₦ {{ product.price }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

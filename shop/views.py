@@ -138,3 +138,7 @@ def terms_condition_view(request):
 
 def delivery_view(request):
     return render(request, 'shop/product/shipping.html', {})
+
+
+def custom_404_page(request, exception):
+    return render(request, '404.html', {'exception': exception})

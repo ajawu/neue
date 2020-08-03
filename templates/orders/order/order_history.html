@@ -56,7 +56,7 @@
                                 {% for item in items %}
                                     <tr>
                                         <td class="product-thumbnail">
-                                            <img src="{% if item.image %}{{ item.image.url }}
+                                            <img src="{% if item.image %}{{ item.image }}
                                                     {% else %}{% static "img/no_image.png" %}{% endif %}"
                                                  alt="Image" class="img-fluid">
                                         </td>
