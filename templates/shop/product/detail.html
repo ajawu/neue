@@ -50,6 +50,13 @@
                     </div>
                     <div class="col-md-6">
                         <h2 class="text-black">{{ product.name }}</h2>
+                        <a href="#review-section">
+                            <span class="fa fa-star active-star star"></span>
+                            <span class="fa fa-star active-star star"></span>
+                            <span class="fa fa-star active-star star"></span>
+                            <span class="fa fa-star active-star star"></span>
+                            <span class="fa fa-star active-star star"></span>
+                        </a>
                         <p class="mb-4">{{ product.description|linebreaks }}</p>
                         <p><strong class="text-primary h4">₦ {{ product.price }}</strong></p>
                         <div class="mb-5">
@@ -57,18 +64,24 @@
                                 {% csrf_token %}
                                 <div class="input-group mb-3" style="max-width: 120px; display: none">
                                     <div class="input-group-prepend">
-                                        <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
+                                        <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;
+                                        </button>
                                     </div>
                                     <input type="text" class="form-control text-center" value="1" name="quantity"
                                            required id="id_quantity">
                                     <div class="input-group-append">
-                                        <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
+                                        <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;
+                                        </button>
                                     </div>
                                 </div>
                                 <input type="hidden" name="override" value="False" required id="id_override">
                                 <button class="buy-now btn btn-sm btn-primary" type="submit">
                                     Add To Cart
                                 </button>
+                                <a class="buy-now btn btn-sm btn-secondary" href="/reviews/create/{{ product.id }}/"
+                                   style="margin-left: 20px">
+                                    Create Review
+                                </a>
                             </form>
                         </div>
                     </div>
@@ -76,5 +89,207 @@
             </div>
         </div>
 
+        <div class="site-section block-3 site-blocks-2 bg-light" id="review-section">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-7 site-section-heading text-center pt-4">
+                        <h2>Reviews</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        {% if reviews|length > 0 %}
+                            <div class="nonloop-block-3 owl-carousel">
+                                {% for review in reviews %}
+                                    <div class="item">
+                                        <div class="block-4 text-center">
+                                            <div class="block-4-text p-4">
+                                                <p style="font-size: 20px; font-weight: 400; width: 299px; height: 68px;">
+                                                    {{ review.review_title }}
+                                                </p>
+                                                <p style="font-size: 15px; width: 299px; height: 125px;">
+                                                    {{ review.review_text }}
+                                                </p>
+                                                <h3>
+                                                    {% for rating in ratings_list  %}
+                                                        {% if rating <= review.review_score %}
+                                                            <span class="fa fa-star active-star star"></span>
+                                                        {% else %}
+                                                            <span class="fa fa-star star"></span>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </h3>
+                                                <p class="mb-0">
+                                                    by <span class="text-primary font-weight-bold">{{ review.review_user }}</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+{#                                <div class="item">#}
+{#                                    <div class="block-4 text-center">#}
+{#                                        <div class="block-4-text p-4">#}
+{#                                            <p style="font-size: 20px; font-weight: 400; width: 299px; height: 68px;">#}
+{#                                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr.#}
+{#                                            </p>#}
+{#                                            <p style="font-size: 15px; width: 299px; height: 125px;">#}
+{#                                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt#}
+{#                                                ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo#}
+{#                                                dolores et ea rebum.#}
+{#                                            </p>#}
+{#                                            <h3>#}
+{#                                                <span class="fa fa-star active-star star"></span>#}
+{#                                                <span class="fa fa-star active-star star"></span>#}
+{#                                                <span class="fa fa-star active-star star"></span>#}
+{#                                                <span class="fa fa-star star"></span>#}
+{#                                                <span class="fa fa-star star"></span>#}
+{#                                            </h3>#}
+{#                                            <p class="mb-0">by <span class="text-primary font-weight-bold">David</span></p>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="item">#}
+{#                                    <div class="block-4 text-center">#}
+{#                                        <div class="block-4-text p-4">#}
+{#                                            <p style="font-size: 20px; font-weight: 400">#}
+{#                                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr.#}
+{#                                            </p>#}
+{#                                            <p style="font-size: 15px">#}
+{#                                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt#}
+{#                                                ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo#}
+{#                                                dolores et ea rebum.#}
+{#                                            </p>#}
+{#                                            <h3>#}
+{#                                                <span class="fa fa-star active-star star"></span>#}
+{#                                                <span class="fa fa-star active-star star"></span>#}
+{#                                                <span class="fa fa-star active-star star"></span>#}
+{#                                                <span class="fa fa-star star"></span>#}
+{#                                                <span class="fa fa-star star"></span>#}
+{#                                            </h3>#}
+{#                                            <p class="mb-0">by <span class="text-primary font-weight-bold">David</span></p>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="item">#}
+{#                                    <div class="block-4 text-center">#}
+{#                                        <div class="block-4-text p-4">#}
+{#                                            <p style="font-size: 20px; font-weight: 400">#}
+{#                                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr.#}
+{#                                            </p>#}
+{#                                            <p style="font-size: 15px">#}
+{#                                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt#}
+{#                                                ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo#}
+{#                                                dolores et ea rebum.#}
+{#                                            </p>#}
+{#                                            <h3>#}
+{#                                                <span class="fa fa-star active-star star"></span>#}
+{#                                                <span class="fa fa-star active-star star"></span>#}
+{#                                                <span class="fa fa-star active-star star"></span>#}
+{#                                                <span class="fa fa-star star"></span>#}
+{#                                                <span class="fa fa-star star"></span>#}
+{#                                            </h3>#}
+{#                                            <p class="mb-0">by <span class="text-primary font-weight-bold">David</span></p>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="item">#}
+{#                                    <div class="block-4 text-center">#}
+{#                                        <div class="block-4-text p-4">#}
+{#                                            <p style="font-size: 20px; font-weight: 400">#}
+{#                                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr.#}
+{#                                            </p>#}
+{#                                            <p style="font-size: 15px">#}
+{#                                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt#}
+{#                                                ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo#}
+{#                                                dolores et ea rebum.#}
+{#                                            </p>#}
+{#                                            <h3>#}
+{#                                                <span class="fa fa-star active-star star"></span>#}
+{#                                                <span class="fa fa-star active-star star"></span>#}
+{#                                                <span class="fa fa-star active-star star"></span>#}
+{#                                                <span class="fa fa-star star"></span>#}
+{#                                                <span class="fa fa-star star"></span>#}
+{#                                            </h3>#}
+{#                                            <p class="mb-0">by <span class="text-primary font-weight-bold">David</span></p>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="item">#}
+{#                                    <div class="block-4 text-center">#}
+{#                                        <div class="block-4-text p-4">#}
+{#                                            <p style="font-size: 20px; font-weight: 400">#}
+{#                                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr.#}
+{#                                            </p>#}
+{#                                            <p style="font-size: 15px">#}
+{#                                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt#}
+{#                                                ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo#}
+{#                                                dolores et ea rebum.#}
+{#                                            </p>#}
+{#                                            <h3>#}
+{#                                                <span class="fa fa-star active-star star"></span>#}
+{#                                                <span class="fa fa-star active-star star"></span>#}
+{#                                                <span class="fa fa-star active-star star"></span>#}
+{#                                                <span class="fa fa-star star"></span>#}
+{#                                                <span class="fa fa-star star"></span>#}
+{#                                            </h3>#}
+{#                                            <p class="mb-0">by <span class="text-primary font-weight-bold">David</span></p>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="item">#}
+{#                                    <div class="block-4 text-center">#}
+{#                                        <div class="block-4-text p-4">#}
+{#                                            <p style="font-size: 20px; font-weight: 400">#}
+{#                                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr.#}
+{#                                            </p>#}
+{#                                            <p style="font-size: 15px">#}
+{#                                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt#}
+{#                                                ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo#}
+{#                                                dolores et ea rebum.#}
+{#                                            </p>#}
+{#                                            <h3>#}
+{#                                                <span class="fa fa-star active-star star"></span>#}
+{#                                                <span class="fa fa-star active-star star"></span>#}
+{#                                                <span class="fa fa-star active-star star"></span>#}
+{#                                                <span class="fa fa-star star"></span>#}
+{#                                                <span class="fa fa-star star"></span>#}
+{#                                            </h3>#}
+{#                                            <p class="mb-0">by <span class="text-primary font-weight-bold">David</span></p>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="item">#}
+{#                                    <div class="block-4 text-center">#}
+{#                                        <div class="block-4-text p-4">#}
+{#                                            <p style="font-size: 20px; font-weight: 400">#}
+{#                                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr.#}
+{#                                            </p>#}
+{#                                            <p style="font-size: 15px">#}
+{#                                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt#}
+{#                                                ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo#}
+{#                                                dolores et ea rebum.#}
+{#                                            </p>#}
+{#                                            <h3>#}
+{#                                                <span class="fa fa-star active-star star"></span>#}
+{#                                                <span class="fa fa-star active-star star"></span>#}
+{#                                                <span class="fa fa-star active-star star"></span>#}
+{#                                                <span class="fa fa-star star"></span>#}
+{#                                                <span class="fa fa-star star"></span>#}
+{#                                            </h3>#}
+{#                                            <p class="mb-0">by <span class="text-primary font-weight-bold">David</span></p>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+
+                            </div>
+                        {% else %}
+                            <div style="text-align: center; margin-top: 35px">
+                                <h3 style="display: inline-block">No reviews Yet</h3>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}

@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from cart.forms import CartAddProductForm
 from .models import Category, Product
+from reviews.models import Review
 from .forms import ContactForm
 from django.views.decorators.http import require_GET
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
@@ -68,12 +69,16 @@ def product_detail(request, id, slug):
 
     categories = Category.objects.all()
 
+    reviews = Review.objects.filter(review_product=product)
+
     return render(request,
                   'shop/product/detail.html',
                   {'product': product,
                    'cart_product_form': cart_product_form,
                    'username': username,
-                   'categories': categories})
+                   'categories': categories,
+                   'reviews': reviews,
+                   'ratings_list': [1, 2, 3, 4, 5]})
 
 
 def home_view(request, newsletter_message=None):
