@@ -87,7 +87,7 @@
                             <div class="item">
                                 <div class="block-4 text-center">
                                     <figure class="block-4-image">
-                                        <img src="/static/resources/images/painting_1_card.jpg"
+                                        <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}"
                                              alt="LAGO" class="img-fluid card-image">
                                     </figure>
                                     <div class="block-4-text p-4">
@@ -95,7 +95,7 @@
                                         <p class="mb-0">
                                             by <a href="/artist/{{ product.owner.id }}/">{{ product.owner }}</a>
                                         </p>
-                                        <p class="text-primary font-weight-bold">₦ {{ product.price }}</p>
+                                        <p class="text-primary font-weight-bold">$ {{ product.price }}</p>
                                     </div>
                                 </div>
                             </div>

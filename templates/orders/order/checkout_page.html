@@ -137,26 +137,26 @@
                                         {% for item in cart %}
                                             <tr>
                                                 <td>{{ item.product.name }}<strong class="mx-2">x</strong> {{ item.quantity }}</td>
-                                                <td>₦ {{ item.total_price|floatformat:2 }}</td>
+                                                <td>$ {{ item.total_price|floatformat:2 }}</td>
                                             </tr>
                                         {% endfor %}
                                         <tr>
                                             <td class="text-black font-weight-bold"><strong>Cart Subtotal</strong></td>
-                                            <td class="text-black">₦ {{ cart.get_total_price|floatformat:2 }}</td>
+                                            <td class="text-black">$ {{ cart.get_total_price|floatformat:2 }}</td>
                                         </tr>
 
                                         {% if cart.coupon %}
                                             <tr>
                                                 <td class="text-black font-weight-bold"><strong>Discount</strong></td>
                                                 <td class="text-black font-weight-bold">
-                                                    <strong>- ₦ {{ cart.get_discount|floatformat:2 }}</strong>
+                                                    <strong>- $ {{ cart.get_discount|floatformat:2 }}</strong>
                                                 </td>
                                             </tr>
                                         {% endif %}
                                         <tr>
                                             <td class="text-black font-weight-bold"><strong>Order Total</strong></td>
                                             <td class="text-black font-weight-bold">
-                                                <strong>₦ {{ cart.get_total_price_after_discount|floatformat:2 }}</strong>
+                                                <strong>$ {{ cart.get_total_price_after_discount|floatformat:2 }}</strong>
                                             </td>
                                         </tr>
                                         </tbody>

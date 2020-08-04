@@ -61,7 +61,7 @@
                             <span class="fa fa-star active-star star"></span>
                         </a>
                         <p class="mb-4">{{ product.description|linebreaks }}</p>
-                        <p><strong class="text-primary h4">₦ {{ product.price }}</strong></p>
+                        <p><strong class="text-primary h4">$ {{ product.price }}</strong></p>
                         <div class="mb-5">
                             <form action="{% url "cart:cart_add" product.id %}" method="post">
                                 {% csrf_token %}

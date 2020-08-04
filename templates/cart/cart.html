@@ -63,7 +63,7 @@
                                             <td class="product-name">
                                                 <h2 class="h5 text-black">{{ product.name }}</h2>
                                             </td>
-                                            <td>₦ {{ item.price }}</td>
+                                            <td>$ {{ item.price }}</td>
                                             <td>
                                                 <form action="{% url "cart:cart_remove" product.id %}" method="post">
                                                     {% csrf_token %}
@@ -116,7 +116,7 @@
                                         <span class="text-black">Subtotal</span>
                                     </div>
                                     <div class="col-md-6 text-right">
-                                        <strong class="text-black">₦ {{ cart.get_total_price|floatformat:2 }}</strong>
+                                        <strong class="text-black">$ {{ cart.get_total_price|floatformat:2 }}</strong>
                                     </div>
                                 </div>
                                 {% if cart.coupon %}
@@ -127,7 +127,7 @@
                                                 <span class="text-black">"{{ code }}" coupon ({{ discount }}% off)</span>
                                             </div>
                                             <div class="col-md-6 text-right">
-                                                <strong class="text-black">- ₦{{ cart.get_discount|floatformat:2 }}</strong>
+                                                <strong class="text-black">- ${{ cart.get_discount|floatformat:2 }}</strong>
                                             </div>
                                         </div>
                                     {% endwith %}
@@ -138,7 +138,7 @@
                                     </div>
                                     <div class="col-md-6 text-right">
                                         <strong class="text-black">
-                                            ₦ {{ cart.get_total_price_after_discount|floatformat:2 }}
+                                            $ {{ cart.get_total_price_after_discount|floatformat:2 }}
                                         </strong>
                                     </div>
                                 </div>
