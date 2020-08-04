@@ -6,6 +6,7 @@ from .forms import ContactForm
 from django.views.decorators.http import require_GET
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model
 
 
 def product_list(request, category_slug=None, artist_name=None):
@@ -55,6 +56,31 @@ def product_list(request, category_slug=None, artist_name=None):
                    'category_breakdown': category_breakdown,
                    'page_numbers': [str(number) for number in range(1, paginator.num_pages + 1)],
                    'active_page': page_number})
+
+
+def artist_page(request, artist_id=None):
+    if request.user.is_authenticated:
+        username = request.user.username
+    else:
+        username = None
+    categories = Category.objects.all()
+    if artist_id:
+        artist = get_object_or_404(get_user_model(), is_an_artist=True, id=artist_id)
+        products = Product.objects.filter(owner=artist)
+
+        return render(request,
+                      'shop/product/artist_detail.html',
+                      {'artist': artist,
+                       'products': products,
+                       'categories': categories,
+                       'username': username})
+    else:
+        artist = get_user_model().objects.filter(is_an_artist=True)
+        return render(request,
+                      'shop/product/artist_list.html',
+                      {'artist': artist,
+                       'categories': categories,
+                       'username': username})
 
 
 def product_detail(request, id, slug):
@@ -119,30 +145,51 @@ def search_view(request):
 
 
 def contact_view(request):
+    if request.user.is_authenticated:
+        username = request.user.username
+    else:
+        username = None
+    categories = Category.objects.all()
     if request.method == 'GET':
-        return render(request, 'shop/product/contact.html', {})
+        return render(request, 'shop/product/contact.html',
+                      {'username': username,
+                       'categories': categories})
     elif request.method == 'POST':
         contact_form = ContactForm(request.POST)
 
         if contact_form.is_valid():
             contact_form.save()
             return render(request, 'shop/product/contact.html',
-                          {'message': 'Information saved an agent will contact you shortly'})
+                          {'message': 'Information saved an agent will contact you shortly',
+                           'username': username,
+                           'categories': categories})
         else:
             return render(request, 'shop/product/contact.html',
-                          {'form': contact_form})
-
-
-def dummy_view(request):
-    return render(request, 'orders/order/checkout_page.html', {})
+                          {'form': contact_form,
+                           'username': username,
+                           'categories': categories})
 
 
 def terms_condition_view(request):
-    return render(request, 'shop/product/terms-conditions.html', {})
+    if request.user.is_authenticated:
+        username = request.user.username
+    else:
+        username = None
+    categories = Category.objects.all()
+    return render(request, 'shop/product/terms-conditions.html',
+                  {'username': username,
+                   'categories': categories})
 
 
 def delivery_view(request):
-    return render(request, 'shop/product/shipping.html', {})
+    if request.user.is_authenticated:
+        username = request.user.username
+    else:
+        username = None
+    categories = Category.objects.all()
+    return render(request, 'shop/product/shipping.html', 
+                  {'username': username,
+                   'categories': categories})
 
 
 def custom_404_page(request, exception):

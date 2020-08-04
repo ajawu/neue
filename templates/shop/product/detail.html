@@ -49,7 +49,10 @@
                              {% static "img/no_image.png" %}{% endif %}" alt="art-piece-image" class="img-fluid">
                     </div>
                     <div class="col-md-6">
-                        <h2 class="text-black">{{ product.name }}</h2>
+                        <h2 class="text-black">
+                            {{ product.name }}
+                            <span style="font-size: 1rem"> by <a href="/artist/{{ product.owner }}/">{{ product.owner }}</a> </span>
+                        </h2>
                         <a href="#review-section">
                             <span class="fa fa-star active-star star"></span>
                             <span class="fa fa-star active-star star"></span>

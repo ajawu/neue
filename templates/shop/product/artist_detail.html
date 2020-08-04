@@ -1,0 +1,109 @@
+{% extends "shop/base.html" %}
+
+{% load static %}
+
+{% block title %}
+    Neue Art Shop &mdash; Art for everyone
+{% endblock %}
+
+{% block navbar %}
+    <li><a href="/">Home</a></li>
+    <li class="active"><a href="/artist/">Artists</a></li>
+    <li><a href="/gallery/">Gallery</a></li>
+    <li class="has-children">
+        <a href="#">Collections</a>
+        <ul class="dropdown">
+            {% for c in categories %}
+                <li>
+                    <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </li>
+    <li><a href="/contact/">Contact</a></li>
+{% endblock %}
+
+{% block content %}
+    <div class="site-wrap">
+        <div class="bg-light py-3" style="border-bottom: 1px solid #eef1f3;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 mb-0">
+                        <a href="/">Home</a>
+                        <span class="mx-2 mb-0">/</span>
+                        <a href="/artist/">Artists</a>
+                        <span class="mx-2 mb-0">/</span>
+                        <strong class="text-black">{{ artist.username }}</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="site-section bg-light" style="padding: 50px 0;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src="{% if artist.avatar %}{{ artist.avatar.url }}{% else %}
+                             {% static "img/no_image.png" %}{% endif %}" alt="art-piece-image" class="img-fluid"
+                            style="height: 100%">
+                    </div>
+                    <div class="col-md-8">
+                        <h2 style="font-size: 50px; color: #5d5d5d">
+                            {{ artist.first_name }} <br> {{ artist.last_name }}
+                        </h2>
+                        <p style="color: #999; font-weight: 300">
+                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
+                            ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
+                            dolores et ea rebum.
+                        </p>
+                        <p style="color: #5d5d5d; font-size: 21px; font-weight: 400; margin-bottom: 0.5rem">
+                            General Info
+                        </p>
+                        <p style="margin-bottom: 0.3rem">
+                            <span style="color: #5d5d5d; font-weight: 400; padding-right: 60px">Location</span>
+                            <span style="color: #999; font-weight: 300">{{ artist.state }}, {{ artist.country }}</span>
+                        </p>
+                        <p>
+                            <span style="color: #5d5d5d; font-weight: 400; padding-right: 76px">Joined</span>
+                            <span style="color: #999; font-weight: 300">{{ artist.date_joined.date }}</span>
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="site-section block-3 site-blocks-2">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-7 site-section-heading text-center pt-4" data-aos="fade" data-aos-delay="">
+                    <h2>Artist Works</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12" data-aos="fade" data-aos-delay="">
+                    <div class="nonloop-block-3 owl-carousel">
+                        {%  for product in products %}
+                            <div class="item">
+                                <div class="block-4 text-center">
+                                    <figure class="block-4-image">
+                                        <img src="/static/resources/images/painting_1_card.jpg"
+                                             alt="LAGO" class="img-fluid card-image">
+                                    </figure>
+                                    <div class="block-4-text p-4">
+                                        <h3><a href="/{{ product.id }}/{{ product.slug }}/">{{ product.name }}</a></h3>
+                                        <p class="mb-0">
+                                            by <a href="/artist/{{ product.owner.id }}/">{{ product.owner }}</a>
+                                        </p>
+                                        <p class="text-primary font-weight-bold">₦ {{ product.price }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}
