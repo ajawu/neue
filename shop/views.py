@@ -75,12 +75,7 @@ def artist_page(request, artist_id=None):
                        'categories': categories,
                        'username': username})
     else:
-        artist = get_user_model().objects.filter(is_an_artist=True)
-        return render(request,
-                      'shop/product/artist_list.html',
-                      {'artist': artist,
-                       'categories': categories,
-                       'username': username})
+        return render(request, '404.html', {'exception': 'Artist with matching id not found'}, status=404)
 
 
 def product_detail(request, id, slug):
