@@ -51,36 +51,25 @@
                     <div class="col-md-9 order-2">
 
                         <div class="row">
-{#                            <div class="col-md-12 mb-5">#}
-{#                                <div class="float-md-left mb-4"><h2 class="text-black h5"></h2></div>#}
-{#                                <div class="d-flex">#}
-{#                                    <div class="dropdown mr-1 ml-md-auto">#}
-{#                                        <button type="button" class="btn btn-secondary btn-sm dropdown-toggle"#}
-{#                                                id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true"#}
-{#                                                aria-expanded="false">#}
-{#                                            Latest#}
-{#                                        </button>#}
-{#                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">#}
-{#                                            <a class="dropdown-item" href="#">Men</a>#}
-{#                                            <a class="dropdown-item" href="#">Women</a>#}
-{#                                            <a class="dropdown-item" href="#">Children</a>#}
-{#                                        </div>#}
-{#                                    </div>#}
-{#                                    <div class="btn-group">#}
-{#                                        <button type="button" class="btn btn-secondary btn-sm dropdown-toggle"#}
-{#                                                id="dropdownMenuReference" data-toggle="dropdown">Reference#}
-{#                                        </button>#}
-{#                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuReference">#}
-{#                                            <a class="dropdown-item" href="#">Relevance</a>#}
-{#                                            <a class="dropdown-item" href="#">Name, A to Z</a>#}
-{#                                            <a class="dropdown-item" href="#">Name, Z to A</a>#}
-{#                                            <div class="dropdown-divider"></div>#}
-{#                                            <a class="dropdown-item" href="#">Price, low to high</a>#}
-{#                                            <a class="dropdown-item" href="#">Price, high to low</a>#}
-{#                                        </div>#}
-{#                                    </div>#}
-{#                                </div>#}
-{#                            </div>#}
+                            <div class="col-md-12 mb-5">
+                                <div class="float-md-left mb-4"><h2 class="text-black h5"></h2></div>
+                                <div class="d-flex">
+                                    <div class="dropdown mr-1 ml-md-auto">
+                                        <button type="button" class="btn btn-secondary btn-sm dropdown-toggle"
+                                                id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true"
+                                                aria-expanded="false">
+                                            Sort By
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+                                            <a class="dropdown-item" href="#">Name, A to Z</a>
+                                            <a class="dropdown-item" href="#">Name, Z to A</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">Price, Lowest to Highest</a>
+                                            <a class="dropdown-item" href="#">Last Name, Highest to Lowest</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="row mb-5">
                             {% for product in products %}
@@ -88,14 +77,17 @@
                                     <div class="block-4 text-center border">
                                         <figure class="block-4-image">
                                             <a href="{{ product.get_absolute_url }}">
-                                                <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}"
+                                                <img src="
+                                                        {% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}"
                                                      alt="Image placeholder"
                                                      class="img-fluid">
                                             </a>
                                         </figure>
                                         <div class="block-4-text p-4">
                                             <h3><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h3>
-                                            <p class="mb-0">by <a href="{% url 'shop:artist_details_page' product.owner.username %}">{{ product.owner.username }}</a></p>
+                                            <p class="mb-0">by <a
+                                                    href="{% url 'shop:artist_details_page' product.owner.username %}">{{ product.owner.username }}</a>
+                                            </p>
                                             <p class="text-primary font-weight-bold">$ {{ product.price }}</p>
                                         </div>
                                     </div>
@@ -109,11 +101,11 @@
                                         <li><a href="{% url 'shop:product_list' %}?page=1">&lt;</a></li>
                                         {% if active_page %}
                                             {% for page_number in page_numbers %}
-                                                    <li {% if page_number == active_page %}class="active"{% endif %}>
-                                                        <a href="{% url 'shop:product_list' %}?page={{ page_number }}">
-                                                            <span>{{ page_number }}</span>
-                                                        </a>
-                                                    </li>
+                                                <li {% if page_number == active_page %}class="active"{% endif %}>
+                                                    <a href="{% url 'shop:product_list' %}?page={{ page_number }}">
+                                                        <span>{{ page_number }}</span>
+                                                    </a>
+                                                </li>
                                             {% endfor %}
                                         {% else %}
                                             <li class="active">
@@ -149,17 +141,23 @@
                                     </li>
                                 {% endfor %}
                             </ul>
+                        </div>
 
-                            <div class="mb-4 mt-5">
-                                <h3 class="mb-3 h6 text-uppercase text-black d-block">Filter by Price</h3>
-                                <div id="slider-range" class="border-primary"></div>
-                                <input type="text" name="text" id="amount" class="form-control border-0 pl-0 bg-white"
-                                       disabled=""/>
-                            </div>
-
-                            <div class="mb-4">
-                                {# Add filter button #}
-                            </div>
+                        <div class="border p-4 rounded mb-4">
+                            <form action="" method="get">
+                                <div class="mb-4">
+                                    <h3 class="mb-3 h6 text-uppercase text-black d-block">Filter by Price</h3>
+                                    <div id="slider-range" class="border-primary"></div>
+                                    <input type="text" name="text" id="amount" class="form-control border-0 pl-0 bg-white"
+                                           disabled=""/>
+                                </div>
+                                <div class="mb-4">
+                                    <button type="submit" class="btn btn-sm btn-primary price-button"
+                                            style="display: block; margin: 0 auto; width: 100%;">
+                                        Apply Price
+                                    </button>
+                                </div>
+                            </form>
                         </div>
 
                     </div>
