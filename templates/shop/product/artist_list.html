@@ -1,0 +1,107 @@
+{% extends "shop/base.html" %}
+
+{% load static %}
+
+{% block title %}
+    Neue Art Shop &mdash; Art for everyone
+{% endblock %}
+
+{% block navbar %}
+    <li><a href="{% url 'shop:home_page' %}">Home</a></li>
+    <li><a href="{% url 'shop:home_page' %}#about">About</a></li>
+    <li><a href="{% url 'shop:product_list' %}">Gallery</a></li>
+    <li class="active"><a href="{% url 'shop:artist_list_page' %}">Artists</a></li>
+    <li class="has-children">
+        <a href="#">Collections</a>
+        <ul class="dropdown">
+            {% for c in categories %}
+                <li>
+                    <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </li>
+    <li><a href="{% url 'shop:contact_page' %}">Contact</a></li>
+{% endblock %}
+
+{% block content %}
+    <div class="site-wrap">
+        <div class="bg-light py-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 mb-0">
+                        <a href="/">Home</a>
+                        <span class="mx-2 mb-0">/</span>
+                        <strong class="text-black">Artists</strong>
+                        <span class="mx-2 mb-0">/</span>
+                        {% if category %}
+                            <strong class="text-black">{{ category }}</strong>
+                        {% else %}
+                            <strong class="text-black">All</strong>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="site-section">
+            <div class="container">
+
+                <div class="row mb-5">
+                    <div class="order-2">
+
+                        <div class="row">
+                            <div class="col-md-12 mb-5">
+                                <div class="float-md-left mb-4"><h2 class="text-black h5"></h2></div>
+                                <div class="d-flex">
+                                    <div class="dropdown mr-1 ml-md-auto">
+                                        <button type="button" class="btn btn-secondary btn-sm dropdown-toggle"
+                                                id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true"
+                                                aria-expanded="false">
+                                            Sort By
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+                                            <a class="dropdown-item" href="#">First Name, A to Z</a>
+                                            <a class="dropdown-item" href="#">First Name, Z to A</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">Last Name, A to Z</a>
+                                            <a class="dropdown-item" href="#">Last Name, Z to A</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">Date Joined, Recent to Oldest</a>
+                                            <a class="dropdown-item" href="#">Date Joined, Oldest to Recent</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-5">
+                            {% for artist in artists %}
+                                <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
+                                    <div class="block-4 text-center" style="">
+                                        <figure class="block-4-image" style="padding-top: 20px;">
+                                            <a href="{% url 'shop:artist_details_page' artist.username %}">
+                                                <img src="{% if artist.avatar %}{{ artist.avatar.url }}{% else %}{% static "img/no_image.png" %}{% endif %}"
+                                                     alt="Artist Avatar" class="img-fluid" style="height: 200px; width: 200px;">
+                                            </a>
+                                        </figure>
+                                        <div class="block-4-text p-4">
+                                            <h3>
+                                                <a href="{% url 'shop:artist_details_page' artist.username %}">
+                                                    {{ artist.first_name }} {{ artist.last_name }}
+                                                </a>
+                                            </h3>
+                                            <p class="mb-0">joined <span class="text-primary font-weight-bold">{{ artist.date_joined.date }}</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

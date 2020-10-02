@@ -10,6 +10,7 @@
     <li class="active"><a href="{% url 'shop:home_page' %}">Home</a></li>
     <li><a href="{% url 'shop:home_page' %}#about">About</a></li>
     <li><a href="{% url 'shop:product_list' %}">Gallery</a></li>
+    <li><a href="{% url 'shop:artist_list_page' %}">Artists</a></li>
     <li class="has-children">
         <a href="#">Collections</a>
         <ul class="dropdown">
@@ -104,7 +105,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="">
-                    <a class="block-2-item" href="/category/sculpture/">
+                    <a class="block-2-item" href="{% url 'shop:product_list_by_category' 'sculpture' %}">
                         <figure class="image">
                             <img src="{% static 'resources/images/woman-smiling-clear.jpg' %}" alt="sculpture-woman-smiling"
                                  class="img-fluid collection-image">
@@ -116,7 +117,7 @@
                     </a>
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="100">
-                    <a class="block-2-item" href="/category/painting/">
+                    <a class="block-2-item" href="{% url 'shop:product_list_by_category' 'painting' %}">
                         <figure class="image">
                             <img src="/static/resources/images/painting_home.jpeg" alt="painting-swing-sunset"
                                  class="img-fluid collection-image">
@@ -128,7 +129,7 @@
                     </a>
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="200">
-                    <a class="block-2-item" href="/category/painting/">
+                    <a class="block-2-item" href="{% url 'shop:product_list_by_category' 'photography' %}">
                         <figure class="image collection-image">
                             <img src="/static/resources/images/photography_landing.jpg" alt=""
                                  class="img-fluid collection-image">
@@ -160,8 +161,8 @@
                                          alt="LAGO" class="img-fluid card-image">
                                 </figure>
                                 <div class="block-4-text p-4">
-                                    <h3><a href="/product/lago/">Lago</a></h3>
-                                    <p class="mb-0">by <a href="/artist/Gaetano-Ligrani/">Gaetano Ligrani</a></p>
+                                    <h3><a href="{% url 'shop:product_detail' 'lago' %}">Lago</a></h3>
+                                    <p class="mb-0">by <a href="{% url 'shop:artist_details_page' 'Gaetano-Ligrani' %}">Gaetano Ligrani</a></p>
                                     <p class="text-primary font-weight-bold">$766</p>
                                 </div>
                             </div>
@@ -173,8 +174,8 @@
                                          alt="Image placeholder" class="img-fluid card-image">
                                 </figure>
                                 <div class="block-4-text p-4">
-                                    <h3><a href="/11/le-vase-anses-bleu/">le vase à anses bleu</a></h3>
-                                    <p class="mb-0">by <a href="/artist/3/">Billy Renoir</a></p>
+                                    <h3><a href="{% url 'shop:product_detail' 'le-vase-anses-bleu' %}">le vase à anses bleu</a></h3>
+                                    <p class="mb-0">by <a href="{% url 'shop:artist_details_page' 'Billy-Renoir' %}">Billy Renoir</a></p>
                                     <p class="text-primary font-weight-bold">$459</p>
                                 </div>
                             </div>
@@ -186,8 +187,8 @@
                                          class="img-fluid card-image">
                                 </figure>
                                 <div class="block-4-text p-4">
-                                    <h3><a href="/10/violette/">Violette</a></h3>
-                                    <p class="mb-0">by <a href="/artist/4/">Aleksandra Petkovic</a></p>
+                                    <h3><a href="{% url 'shop:product_detail' 'violette' %}">Violette</a></h3>
+                                    <p class="mb-0">by <a href="{% url 'shop:artist_details_page' 'Aleksandra-Petkovic' %}">Aleksandra Petkovic</a></p>
                                     <p class="text-primary font-weight-bold">$150</p>
                                 </div>
                             </div>
@@ -199,8 +200,8 @@
                                          alt="Image placeholder" class="img-fluid card-image">
                                 </figure>
                                 <div class="block-4-text p-4">
-                                    <h3><a href="/2/emotional-creation/">The Emotional Creation</a></h3>
-                                    <p class="mb-0">by <a href="/artist/5/">Carla Sá Fernandes</a></p>
+                                    <h3><a href="{% url 'shop:product_detail' 'emotional-creation' %}">The Emotional Creation</a></h3>
+                                    <p class="mb-0">by <a href="{% url 'shop:artist_details_page' 'Carla-Sá-Fernandes' %}">Carla Sá Fernandes</a></p>
                                     <p class="text-primary font-weight-bold">$2641</p>
                                 </div>
                             </div>
@@ -212,8 +213,8 @@
                                          class="img-fluid card-image">
                                 </figure>
                                 <div class="block-4-text p-4">
-                                    <h3><a href="/5/jeux-poisson-oeil/">Jeux Poisson Oeil</a></h3>
-                                    <p class="mb-0">by <a href="/artist/6/">Mesrine</a></p>
+                                    <h3><a href="{% url 'shop:product_detail' 'jeux-poisson-oeil' %}">Jeux Poisson Oeil</a></h3>
+                                    <p class="mb-0">by <a href="{% url 'shop:artist_details_page' 'Mesrine' %}">Mesrine</a></p>
                                     <p class="text-primary font-weight-bold">$300</p>
                                 </div>
                             </div>

@@ -7,6 +7,7 @@ from django.views.decorators.http import require_GET
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib.auth import get_user_model
 from django.contrib.auth import get_user_model
+from django.views.generic import ListView
 
 
 def product_list(request, category_slug=None):
@@ -69,6 +70,14 @@ def artist_page(request, artist_username):
                    'products': products,
                    'categories': categories,
                    'username': username})
+
+
+class ListArtist(ListView):
+    template_name = 'shop/product/artist_list.html'
+    context_object_name = 'artists'
+
+    def get_queryset(self):
+        return get_user_model().objects.filter(is_an_artist=True)
 
 
 def product_detail(request, slug):

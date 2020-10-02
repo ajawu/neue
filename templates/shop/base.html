@@ -125,16 +125,16 @@
                         </div>
                         <div class="col-md-6 col-lg-4">
                             <ul class="list-unstyled">
-                                <li><a href="/gallery/">Gallery</a></li>
-                                <li><a href="/#about">About Us</a></li>
-                                <li><a href="/contact/">Contact</a></li>
+                                <li><a href="{% url 'shop:product_list' %}">Gallery</a></li>
+                                <li><a href="{% url 'shop:home_page' %}#about">About Us</a></li>
+                                <li><a href="{% url 'shop:contact_page' %}">Contact</a></li>
                             </ul>
                         </div>
                         <div class="col-md-6 col-lg-4">
                             <ul class="list-unstyled">
                                 <li><a href="{% url "cart:cart_detail" %}">Shopping cart</a></li>
-                                <li><a href="/#testimonial">Testimonials</a></li>
-                                <li><a href="/artist/">Artists</a></li>
+                                <li><a href="{% url 'shop:home_page' %}#testimonial">Testimonials</a></li>
+                                <li><a href="{% url 'shop:artist_list_page' %}">Artists</a></li>
                             </ul>
                         </div>
                         <div class="col-md-6 col-lg-4">

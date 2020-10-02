@@ -15,6 +15,7 @@ urlpatterns = [
     path('gallery/', views.product_list, name='product_list'),
     path('category/<slug:category_slug>/', views.product_list, name='product_list_by_category'),
 
+    path('artist/', views.ListArtist.as_view(), name='artist_list_page'),
     path('artist/<str:artist_username>/', views.artist_page, name='artist_details_page'),
     path('product/<slug:slug>/', views.product_detail, name='product_detail'),
 ]
