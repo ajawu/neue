@@ -6,8 +6,8 @@ from .forms import ContactForm
 from django.views.decorators.http import require_GET
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib.auth import get_user_model
-from django.contrib.auth import get_user_model
 from django.views.generic import ListView
+from django.db.models import Q
 
 
 def product_list(request, category_slug=None):
@@ -127,7 +127,10 @@ def search_view(request):
     search_phrase = request.GET.get('keyword')
     categories = Category.objects.all()
     if search_phrase:
-        matching_products = Product.objects.filter(name__contains=search_phrase)
+        matching_products = Product.objects.filter(Q(name__icontains=search_phrase) |
+                                                   Q(category__name__icontains=search_phrase) |
+                                                   Q(owner__first_name__icontains=search_phrase) |
+                                                   Q(owner__last_name__icontains=search_phrase))
         return render(request,
                       'shop/product/search_result.html',
                       {'products': matching_products,

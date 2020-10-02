@@ -100,9 +100,10 @@
             <div class="container">
                 <ul class="site-menu js-clone-nav d-none d-md-block">
                     <!-- NAVBAR Items-->
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/#about">About</a></li>
-                    <li><a href="/gallery/">Gallery</a></li>
+                    <li><a href="{% url 'shop:home_page' %}">Home</a></li>
+                    <li><a href="{% url 'shop:home_page' %}#about">About</a></li>
+                    <li><a href="{% url 'shop:product_list' %}">Gallery</a></li>
+                    <li><a href="{% url 'shop:artist_list_page' %}">Artists</a></li>
                     <li class="has-children">
                         <a href="#">Collections</a>
                         <ul class="dropdown">
@@ -113,7 +114,7 @@
                             {% endfor %}
                         </ul>
                     </li>
-                    <li><a href="/contact/">Contact</a></li>
+                    <li><a href="{% url 'shop:contact_page' %}">Contact</a></li>
                 </ul>
             </div>
         </nav>
@@ -124,7 +125,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 mb-0">
-                        <a href="/">Home</a>
+                        <a href="{% url 'shop:home_page' %}">Home</a>
+                        <span class="mx-2 mb-0">/</span>
+                        <a href="{% url 'shop:product_list' %}">Products</a>
                         <span class="mx-2 mb-0">/</span>
                         <strong class="text-black">Search</strong>
                     </div>
@@ -136,8 +139,7 @@
             <div class="container">
 
                 <div class="row mb-5">
-                    <div class="col-md-9 order-2">
-
+                    <div class="col-md-12 order-4">
                         <div class="row">
                             <div class="col-md-12 mb-5">
                                 <div class="float-md-left mb-4"><h2 class="text-black h5"></h2></div>
@@ -146,20 +148,9 @@
                                         <button type="button" class="btn btn-secondary btn-sm dropdown-toggle"
                                                 id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true"
                                                 aria-expanded="false">
-                                            Latest
+                                            Sort By
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
-                                            <a class="dropdown-item" href="#">Painting</a>
-                                            <a class="dropdown-item" href="#">Sculpture</a>
-                                            <a class="dropdown-item" href="#">Photograph</a>
-                                        </div>
-                                    </div>
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-secondary btn-sm dropdown-toggle"
-                                                id="dropdownMenuReference" data-toggle="dropdown">Reference
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuReference">
-                                            <a class="dropdown-item" href="#">Relevance</a>
                                             <a class="dropdown-item" href="#">Name, A to Z</a>
                                             <a class="dropdown-item" href="#">Name, Z to A</a>
                                             <div class="dropdown-divider"></div>
@@ -224,10 +215,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="col-md-3 order-1 mb-5 mb-md-0">
-
                     </div>
                 </div>
 
