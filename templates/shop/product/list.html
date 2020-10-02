@@ -7,9 +7,9 @@
 {% endblock %}
 
 {% block navbar %}
-    <li><a href="/">Home</a></li>
-    <li><a href="/#about">About</a></li>
-    <li class="active"><a href="/gallery/">Gallery</a></li>
+    <li><a href="{% url 'shop:home_page' %}">Home</a></li>
+    <li><a href="{% url 'shop:home_page' %}#about">About</a></li>
+    <li class="active"><a href="{% url 'shop:product_list' %}">Gallery</a></li>
     <li class="has-children">
         <a href="#">Collections</a>
         <ul class="dropdown">
@@ -20,7 +20,7 @@
             {% endfor %}
         </ul>
     </li>
-    <li><a href="/contact/">Contact</a></li>
+    <li><a href="{% url 'shop:contact_page' %}">Contact</a></li>
 {% endblock %}
 
 {% block content %}
@@ -94,7 +94,7 @@
                                         </figure>
                                         <div class="block-4-text p-4">
                                             <h3><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h3>
-                                            <p class="mb-0">by <a href="/artist/{{ product.owner.id }}/">{{ product.owner }}</a></p>
+                                            <p class="mb-0">by <a href="{% url 'shop:artist_details_page' product.owner.username %}">{{ product.owner.username }}</a></p>
                                             <p class="text-primary font-weight-bold">$ {{ product.price }}</p>
                                         </div>
                                     </div>
@@ -105,31 +105,30 @@
                             <div class="col-md-12 text-center">
                                 <div class="site-block-27">
                                     <ul>
-                                        <li><a href="/gallery/?page=1">&lt;</a></li>
+                                        <li><a href="{% url 'shop:product_list' %}?page=1">&lt;</a></li>
                                         {% if active_page %}
                                             {% for page_number in page_numbers %}
                                                     <li {% if page_number == active_page %}class="active"{% endif %}>
-                                                        <a href="/gallery/?page={{ page_number }}">
+                                                        <a href="{% url 'shop:product_list' %}?page={{ page_number }}">
                                                             <span>{{ page_number }}</span>
                                                         </a>
                                                     </li>
                                             {% endfor %}
                                         {% else %}
                                             <li class="active">
-                                                <a href="/gallery/?page=1"><span>1</span></a>
+                                                <a href="{% url 'shop:product_list' %}?page=1"><span>1</span></a>
                                             </li>
                                             {% for page_number in page_numbers %}
                                                 {% if page_number != '1' %}
                                                     <li>
-                                                        <a href="/gallery/?page={{ page_number }}">
+                                                        <a href="{% url 'shop:product_list' %}?page={{ page_number }}">
                                                             <span>{{ page_number }}</span>
                                                         </a>
                                                     </li>
                                                 {% endif %}
                                             {% endfor %}
                                         {% endif %}
-                                        <li><a href="#">&gt;</a></li>
-
+                                        <li><a href="{% url 'shop:product_list' %}?page={{ next_page }}">&gt;</a></li>
                                     </ul>
                                 </div>
                             </div>

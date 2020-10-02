@@ -7,9 +7,9 @@
 {% endblock %}
 
 {% block navbar %}
-    <li class="active"><a href="/">Home</a></li>
-    <li><a href="/#about">About</a></li>
-    <li><a href="/gallery/">Gallery</a></li>
+    <li class="active"><a href="{% url 'shop:home_page' %}">Home</a></li>
+    <li><a href="{% url 'shop:home_page' %}#about">About</a></li>
+    <li><a href="{% url 'shop:product_list' %}">Gallery</a></li>
     <li class="has-children">
         <a href="#">Collections</a>
         <ul class="dropdown">
@@ -20,7 +20,7 @@
             {% endfor %}
         </ul>
     </li>
-    <li><a href="/contact/">Contact</a></li>
+    <li><a href="{% url 'shop:contact_page' %}">Contact</a></li>
 {% endblock %}
 
 {% block content %}
@@ -34,7 +34,7 @@
                             Finding art should be an enjoyable activity not a chore, and we strive to make it so
                         </p>
                         <p>
-                            <a href="/gallery" class="btn btn-sm btn-primary">Shop Now</a>
+                            <a href="{% url 'shop:product_list' %}" class="btn btn-sm btn-primary">Shop Now</a>
                         </p>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
         </div>
     </div>
 
-    <div class="site-section site-section-sm site-blocks-1">
+    <div class="site-section site-section-sm site-blocks-1 bg-light">
         <div class="container">
             <div class="row">
                 <div class="col-md-6 col-lg-4 d-lg-flex mb-4 mb-lg-0 pl-4" data-aos="fade-up" data-aos-delay="">
@@ -51,7 +51,7 @@
                     </div>
                     <div class="text">
                         <h2 class="text-uppercase">Shipping within a week</h2>
-                        <p>All art pieces will be delivered in pristine condition within a week or less of payment</p>
+                        <p class="darker-p">All art pieces will be delivered in pristine condition within a week or less of payment</p>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-4 d-lg-flex mb-4 mb-lg-0 pl-4" data-aos="fade-up" data-aos-delay="100">
@@ -60,7 +60,7 @@
                     </div>
                     <div class="text">
                         <h2 class="text-uppercase">Free Returns</h2>
-                        <p>There are no additional costs on returns.
+                        <p class="darker-p">There are no additional costs on returns.
                             If it doesn't fit it can be returned. With no hidden fees, we promise</p>
                     </div>
                 </div>
@@ -70,7 +70,7 @@
                     </div>
                     <div class="text">
                         <h2 class="text-uppercase">Customer Support</h2>
-                        <p>
+                        <p class="darker-p">
                             Our customer support team is always available to handle any complaints or enquiries.
                         </p>
                     </div>
@@ -100,11 +100,11 @@
         </div>
     </div>
 
-    <div class="site-section site-blocks-2">
+    <div class="site-section site-blocks-2 bg-light">
         <div class="container">
             <div class="row">
                 <div class="col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="">
-                    <a class="block-2-item" href="#">
+                    <a class="block-2-item" href="/category/sculpture/">
                         <figure class="image">
                             <img src="{% static 'resources/images/woman-smiling-clear.jpg' %}" alt="sculpture-woman-smiling"
                                  class="img-fluid collection-image">
@@ -116,7 +116,7 @@
                     </a>
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="100">
-                    <a class="block-2-item" href="#">
+                    <a class="block-2-item" href="/category/painting/">
                         <figure class="image">
                             <img src="/static/resources/images/painting_home.jpeg" alt="painting-swing-sunset"
                                  class="img-fluid collection-image">
@@ -128,7 +128,7 @@
                     </a>
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="200">
-                    <a class="block-2-item" href="#">
+                    <a class="block-2-item" href="/category/painting/">
                         <figure class="image collection-image">
                             <img src="/static/resources/images/photography_landing.jpg" alt=""
                                  class="img-fluid collection-image">
@@ -143,7 +143,7 @@
         </div>
     </div>
 
-    <div class="site-section block-3 site-blocks-2 bg-light">
+    <div class="site-section block-3 site-blocks-2">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-7 site-section-heading text-center pt-4" data-aos="fade" data-aos-delay="">
@@ -160,8 +160,8 @@
                                          alt="LAGO" class="img-fluid card-image">
                                 </figure>
                                 <div class="block-4-text p-4">
-                                    <h3><a href="/3/lago/">Lago</a></h3>
-                                    <p class="mb-0">by <a href="/artist/2/">Gaetano Ligrani</a></p>
+                                    <h3><a href="/product/lago/">Lago</a></h3>
+                                    <p class="mb-0">by <a href="/artist/Gaetano-Ligrani/">Gaetano Ligrani</a></p>
                                     <p class="text-primary font-weight-bold">$766</p>
                                 </div>
                             </div>
@@ -224,7 +224,7 @@
         </div>
     </div>
 
-    <div class="site-section block-8" id="testimonial">
+    <div class="site-section block-8 bg-light" id="testimonial">
         <div class="container">
             <div class="row justify-content-center  mb-5">
                 <div class="col-md-7 site-section-heading text-center pt-4" data-aos="fade-up" data-aos-delay="">

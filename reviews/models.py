@@ -13,4 +13,4 @@ class Review(models.Model):
                                            MinValueValidator(1),
                                            MaxValueValidator(5)
                                        ])
-    review_product = models.ForeignKey(Product, on_delete=models.CASCADE, blank=True)
+    review_product = models.ForeignKey(Product, on_delete=models.CASCADE, blank=True, related_name='reviews')

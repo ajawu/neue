@@ -31,7 +31,7 @@
                 <div class="row align-items-center">
 
                     <div class="col-6 col-md-4 order-2 order-md-1 site-search-icon text-left">
-                        <form action="/search" method="get" class="site-block-top-search">
+                        <form action="{% url 'shop:search_page' %}" method="get" class="site-block-top-search">
                             <span class="icon icon-search2"></span>
                             {% if search_phrase %}
                                 <input type="text" class="form-control border-0" value="{{ search_phrase }}"
@@ -52,15 +52,15 @@
                         <div class="site-top-icons">
                             <ul>
                                 <li>
-                                    {% if username %}
+                                    {% if request.user.username %}
                                         <div class="dropdown show">
                                             <a class="" href="#" role="button"
                                                id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
                                                aria-expanded="false" style="font-size: 18px">
-                                                {{ username }} <i class="fa fa-angle-down"></i>
+                                                {{ request.user.username }} <i class="fa fa-angle-down"></i>
                                             </a>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a href="/orders/history/" class="dropdown-item">
+                                                <a href="{% url 'orders:order_history' %}" class="dropdown-item">
                                                     Purchase History
                                                 </a>
                                                 <form method="post" action="{% url 'account_logout' %}">
@@ -115,7 +115,7 @@
     {% block content %}
     {% endblock %}
 
-    <footer class="site-footer border-top">
+    <footer class="site-footer border-top bg-white">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 mb-5 mb-lg-0">

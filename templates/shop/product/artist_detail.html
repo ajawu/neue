@@ -91,9 +91,9 @@
                                              alt="LAGO" class="img-fluid card-image">
                                     </figure>
                                     <div class="block-4-text p-4">
-                                        <h3><a href="/{{ product.id }}/{{ product.slug }}/">{{ product.name }}</a></h3>
+                                        <h3><a href="/product/{{ product.slug }}/">{{ product.name }}</a></h3>
                                         <p class="mb-0">
-                                            by <a href="/artist/{{ product.owner.id }}/">{{ product.owner }}</a>
+                                            by <a href="/artist/{{ product.owner.username }}/">{{ product.owner }}</a>
                                         </p>
                                         <p class="text-primary font-weight-bold">$ {{ product.price }}</p>
                                     </div>

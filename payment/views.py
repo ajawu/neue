@@ -28,6 +28,7 @@ def payment_process(request):
                 for transaction in response_object['data']:
                     if transaction['reference'] == payment_reference:
                         transaction_object = transaction
+                        break
 
                 if transaction_object:
                     if Decimal(transaction_object['amount']) == total_cost * 100:

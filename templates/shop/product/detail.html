@@ -20,7 +20,7 @@
             {% endfor %}
         </ul>
     </li>
-    <li><a href="/contact/">Contact</a></li>
+    <li><a href="{% url 'shop:contact_page' %}">Contact</a></li>
 {% endblock %}
 
 {% block content %}
@@ -129,161 +129,6 @@
                                         </div>
                                     </div>
                                 {% endfor %}
-{#                                <div class="item">#}
-{#                                    <div class="block-4 text-center">#}
-{#                                        <div class="block-4-text p-4">#}
-{#                                            <p style="font-size: 20px; font-weight: 400; width: 299px; height: 68px;">#}
-{#                                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr.#}
-{#                                            </p>#}
-{#                                            <p style="font-size: 15px; width: 299px; height: 125px;">#}
-{#                                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt#}
-{#                                                ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo#}
-{#                                                dolores et ea rebum.#}
-{#                                            </p>#}
-{#                                            <h3>#}
-{#                                                <span class="fa fa-star active-star star"></span>#}
-{#                                                <span class="fa fa-star active-star star"></span>#}
-{#                                                <span class="fa fa-star active-star star"></span>#}
-{#                                                <span class="fa fa-star star"></span>#}
-{#                                                <span class="fa fa-star star"></span>#}
-{#                                            </h3>#}
-{#                                            <p class="mb-0">by <span class="text-primary font-weight-bold">David</span></p>#}
-{#                                        </div>#}
-{#                                    </div>#}
-{#                                </div>#}
-{#                                <div class="item">#}
-{#                                    <div class="block-4 text-center">#}
-{#                                        <div class="block-4-text p-4">#}
-{#                                            <p style="font-size: 20px; font-weight: 400">#}
-{#                                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr.#}
-{#                                            </p>#}
-{#                                            <p style="font-size: 15px">#}
-{#                                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt#}
-{#                                                ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo#}
-{#                                                dolores et ea rebum.#}
-{#                                            </p>#}
-{#                                            <h3>#}
-{#                                                <span class="fa fa-star active-star star"></span>#}
-{#                                                <span class="fa fa-star active-star star"></span>#}
-{#                                                <span class="fa fa-star active-star star"></span>#}
-{#                                                <span class="fa fa-star star"></span>#}
-{#                                                <span class="fa fa-star star"></span>#}
-{#                                            </h3>#}
-{#                                            <p class="mb-0">by <span class="text-primary font-weight-bold">David</span></p>#}
-{#                                        </div>#}
-{#                                    </div>#}
-{#                                </div>#}
-{#                                <div class="item">#}
-{#                                    <div class="block-4 text-center">#}
-{#                                        <div class="block-4-text p-4">#}
-{#                                            <p style="font-size: 20px; font-weight: 400">#}
-{#                                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr.#}
-{#                                            </p>#}
-{#                                            <p style="font-size: 15px">#}
-{#                                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt#}
-{#                                                ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo#}
-{#                                                dolores et ea rebum.#}
-{#                                            </p>#}
-{#                                            <h3>#}
-{#                                                <span class="fa fa-star active-star star"></span>#}
-{#                                                <span class="fa fa-star active-star star"></span>#}
-{#                                                <span class="fa fa-star active-star star"></span>#}
-{#                                                <span class="fa fa-star star"></span>#}
-{#                                                <span class="fa fa-star star"></span>#}
-{#                                            </h3>#}
-{#                                            <p class="mb-0">by <span class="text-primary font-weight-bold">David</span></p>#}
-{#                                        </div>#}
-{#                                    </div>#}
-{#                                </div>#}
-{#                                <div class="item">#}
-{#                                    <div class="block-4 text-center">#}
-{#                                        <div class="block-4-text p-4">#}
-{#                                            <p style="font-size: 20px; font-weight: 400">#}
-{#                                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr.#}
-{#                                            </p>#}
-{#                                            <p style="font-size: 15px">#}
-{#                                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt#}
-{#                                                ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo#}
-{#                                                dolores et ea rebum.#}
-{#                                            </p>#}
-{#                                            <h3>#}
-{#                                                <span class="fa fa-star active-star star"></span>#}
-{#                                                <span class="fa fa-star active-star star"></span>#}
-{#                                                <span class="fa fa-star active-star star"></span>#}
-{#                                                <span class="fa fa-star star"></span>#}
-{#                                                <span class="fa fa-star star"></span>#}
-{#                                            </h3>#}
-{#                                            <p class="mb-0">by <span class="text-primary font-weight-bold">David</span></p>#}
-{#                                        </div>#}
-{#                                    </div>#}
-{#                                </div>#}
-{#                                <div class="item">#}
-{#                                    <div class="block-4 text-center">#}
-{#                                        <div class="block-4-text p-4">#}
-{#                                            <p style="font-size: 20px; font-weight: 400">#}
-{#                                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr.#}
-{#                                            </p>#}
-{#                                            <p style="font-size: 15px">#}
-{#                                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt#}
-{#                                                ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo#}
-{#                                                dolores et ea rebum.#}
-{#                                            </p>#}
-{#                                            <h3>#}
-{#                                                <span class="fa fa-star active-star star"></span>#}
-{#                                                <span class="fa fa-star active-star star"></span>#}
-{#                                                <span class="fa fa-star active-star star"></span>#}
-{#                                                <span class="fa fa-star star"></span>#}
-{#                                                <span class="fa fa-star star"></span>#}
-{#                                            </h3>#}
-{#                                            <p class="mb-0">by <span class="text-primary font-weight-bold">David</span></p>#}
-{#                                        </div>#}
-{#                                    </div>#}
-{#                                </div>#}
-{#                                <div class="item">#}
-{#                                    <div class="block-4 text-center">#}
-{#                                        <div class="block-4-text p-4">#}
-{#                                            <p style="font-size: 20px; font-weight: 400">#}
-{#                                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr.#}
-{#                                            </p>#}
-{#                                            <p style="font-size: 15px">#}
-{#                                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt#}
-{#                                                ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo#}
-{#                                                dolores et ea rebum.#}
-{#                                            </p>#}
-{#                                            <h3>#}
-{#                                                <span class="fa fa-star active-star star"></span>#}
-{#                                                <span class="fa fa-star active-star star"></span>#}
-{#                                                <span class="fa fa-star active-star star"></span>#}
-{#                                                <span class="fa fa-star star"></span>#}
-{#                                                <span class="fa fa-star star"></span>#}
-{#                                            </h3>#}
-{#                                            <p class="mb-0">by <span class="text-primary font-weight-bold">David</span></p>#}
-{#                                        </div>#}
-{#                                    </div>#}
-{#                                </div>#}
-{#                                <div class="item">#}
-{#                                    <div class="block-4 text-center">#}
-{#                                        <div class="block-4-text p-4">#}
-{#                                            <p style="font-size: 20px; font-weight: 400">#}
-{#                                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr.#}
-{#                                            </p>#}
-{#                                            <p style="font-size: 15px">#}
-{#                                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt#}
-{#                                                ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo#}
-{#                                                dolores et ea rebum.#}
-{#                                            </p>#}
-{#                                            <h3>#}
-{#                                                <span class="fa fa-star active-star star"></span>#}
-{#                                                <span class="fa fa-star active-star star"></span>#}
-{#                                                <span class="fa fa-star active-star star"></span>#}
-{#                                                <span class="fa fa-star star"></span>#}
-{#                                                <span class="fa fa-star star"></span>#}
-{#                                            </h3>#}
-{#                                            <p class="mb-0">by <span class="text-primary font-weight-bold">David</span></p>#}
-{#                                        </div>#}
-{#                                    </div>#}
-{#                                </div>#}
-
                             </div>
                         {% else %}
                             <div style="text-align: center; margin-top: 35px">
@@ -296,3 +141,4 @@
         </div>
     </div>
 {% endblock %}
+

@@ -9,23 +9,18 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth import get_user_model
 
 
-def product_list(request, category_slug=None, artist_name=None):
-    if request.user.is_authenticated:
-        username = request.user.username
-    else:
-        username = None
+def product_list(request, category_slug=None):
     category = None
-    page_number = request.GET.get('page')
+    try:
+        page_number = int(request.GET.get('page', 1))
+    except ValueError:
+        page_number = 1
 
     categories = Category.objects.all()
 
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
         products_list = Product.objects.filter(category=category, available=True)
-    elif artist_name:
-        user_model = get_user_model()
-        owner = user_model.objects.get(username=artist_name)
-        products_list = Product.objects.filter(owner=owner, available=True)
     else:
         products_list = Product.objects.filter(available=True)
 
@@ -43,7 +38,7 @@ def product_list(request, category_slug=None, artist_name=None):
     try:
         products = paginator.page(page_number)
     except PageNotAnInteger:
-        products = paginator.page(1)
+        products = paginator.page(page_number)
     except EmptyPage:
         products = paginator.page(paginator.num_pages)
 
@@ -52,33 +47,31 @@ def product_list(request, category_slug=None, artist_name=None):
                   {'category': category,
                    'categories': categories,
                    'products': products,
-                   'username': username,
                    'category_breakdown': category_breakdown,
                    'page_numbers': [str(number) for number in range(1, paginator.num_pages + 1)],
-                   'active_page': page_number})
+                   'active_page': page_number,
+                   'next_page': page_number + 1 if page_number < paginator.num_pages else paginator.num_pages})
 
 
-def artist_page(request, artist_id=None):
+def artist_page(request, artist_username):
     if request.user.is_authenticated:
         username = request.user.username
     else:
         username = None
     categories = Category.objects.all()
-    if artist_id:
-        artist = get_object_or_404(get_user_model(), is_an_artist=True, id=artist_id)
-        products = Product.objects.filter(owner=artist)
 
-        return render(request,
-                      'shop/product/artist_detail.html',
-                      {'artist': artist,
-                       'products': products,
-                       'categories': categories,
-                       'username': username})
-    else:
-        return render(request, '404.html', {'exception': 'Artist with matching id not found'}, status=404)
+    artist = get_object_or_404(get_user_model(), is_an_artist=True, username=artist_username)
+    products = Product.objects.filter(owner=artist)
+
+    return render(request,
+                  'shop/product/artist_detail.html',
+                  {'artist': artist,
+                   'products': products,
+                   'categories': categories,
+                   'username': username})
 
 
-def product_detail(request, id, slug):
+def product_detail(request, slug):
     if request.user.is_authenticated:
         username = request.user.username
     else:

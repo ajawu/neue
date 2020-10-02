@@ -785,6 +785,7 @@ a {
 	line-height: 1.5;
 	position: relative;
 	margin-top: 30px;
+    color: #82828a;
 }
 
 .customer-quote:before {
@@ -797,11 +798,12 @@ a {
 }
 
 .avatar-container {
-	font-size: 0.9em;
+	font-size: 1.0em;
 	font-style: normal;
 	font-weight: 300;
 	margin-top: 25px;
 	display: block;
+    color: #82828a;
 }
 
 .avatar-container img {
@@ -943,7 +945,7 @@ a {
 @media only screen and (max-width: 480px) {
   .notfound .notfound-404 {
     height: 148px;
-    margin: 0px auto 10px;
+    margin: 0 auto 10px;
   }
   .notfound .notfound-404 h1 {
     font-size: 86px;
@@ -955,4 +957,9 @@ a {
     padding: 7px 15px;
     font-size: 14px;
   }
+}
+
+/*  Custom CSS  */
+.darker-p {
+  color: #82828a;
 }
