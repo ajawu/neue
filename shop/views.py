@@ -89,7 +89,28 @@ class ListArtist(ListView):
     context_object_name = 'artists'
 
     def get_queryset(self):
-        return get_user_model().objects.filter(is_an_artist=True)
+        query_set = get_user_model().objects.filter(is_an_artist=True)
+        sort_by = self.request.GET.get('sortby')
+        order = self.request.GET.get('order')
+
+        if sort_by and order:
+            if sort_by == 'first_name':
+                if order == 'ascending':
+                    return query_set.order_by('first_name')
+                elif order == 'descending':
+                    return query_set.order_by('-first_name')
+            elif sort_by == 'last_name':
+                if order == 'ascending':
+                    return query_set.order_by('last_name')
+                elif order == 'descending':
+                    return query_set.order_by('-last_name')
+            elif sort_by == 'date_joined':
+                if order == 'ascending':
+                    return query_set.order_by('date_joined')
+                elif order == 'descending':
+                    return query_set.order_by('-date_joined')
+
+        return query_set
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
