@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="{% static 'resources/css/owl.theme.default.min.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'resources/css/aos.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'resources/css/style.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'resources/css/util.min.css' %}" type="text/css">
 
 </head>
 <body>
@@ -75,7 +76,7 @@
                                             </div>
                                         </div>
                                     {% else %}
-                                        <a href="/accounts/login/">
+                                        <a href="{% url 'account_login' %}">
                                             <span class="icon icon-person"></span>
                                         </a>
                                     {% endif %}
@@ -139,8 +140,8 @@
                         </div>
                         <div class="col-md-6 col-lg-4">
                             <ul class="list-unstyled">
-                                <li><a href="/delivery/">Delivery Fees</a></li>
-                                <li><a href="/terms-of-use/">Terms Of Use</a></li>
+                                <li><a href="{% url 'shop:delivery_fees' %}">Delivery Fees</a></li>
+                                <li><a href="{% url 'shop:terms_and_conditions' %}">Terms Of Use</a></li>
                             </ul>
                         </div>
                     </div>
@@ -161,7 +162,7 @@
                         {% if newsletter_response %}
                             <p style="color: #dd2222">{{ newsletter_response }}</p>
                         {% endif %}
-                        <form action="/newsletter/add/" method="post">
+                        <form action="{% url 'newsletter:add_user_newsletter' %}" method="post">
                             {% csrf_token %}
                             <label for="email_subscribe" class="footer-heading">
                                 Subscribe to our newsletter

@@ -8,50 +8,62 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib.auth import get_user_model
 from django.views.generic import ListView
 from django.db.models import Q
+import decimal
 
 
-def product_list(request, category_slug=None):
-    category = None
-    try:
-        page_number = int(request.GET.get('page', 1))
-    except ValueError:
-        page_number = 1
+class ProductList(ListView):
+    template_name = 'shop/product/list.html'
+    paginate_by = 6
+    context_object_name = 'products'
 
-    categories = Category.objects.all()
+    def get_queryset(self):
+        query_set = Product.objects.filter(available=True)
+        # Filter by category
+        category_slug = self.kwargs.get('category_slug')
+        if category_slug:
+            category = get_object_or_404(Category, slug=category_slug)
+            return query_set.filter(category=category)
 
-    if category_slug:
-        category = get_object_or_404(Category, slug=category_slug)
-        products_list = Product.objects.filter(category=category, available=True)
-    else:
-        products_list = Product.objects.filter(available=True)
+        # Sort according to url parameters
+        sort_by = self.request.GET.get('sortby')
+        order = self.request.GET.get('order')
+        if sort_by and order:
+            if sort_by == 'name':
+                if order == 'ascending':
+                    return query_set.order_by('name')
+                elif order == 'descending':
+                    return query_set.order_by('-name')
+            elif sort_by == 'price':
+                if order == 'ascending':
+                    return query_set.order_by('price')
+                elif order == 'descending':
+                    return query_set.order_by('-price')
 
-    paginator = Paginator(products_list, 9)
+        # Sort according to price
+        try:
+            minimum_price = decimal.Decimal(self.request.GET.get('minimum', '')[1:])
+            maximum_price = decimal.Decimal(self.request.GET.get('maximum', '')[1:])
 
-    # Category length
-    category_breakdown = []
-    for c in categories:
-        category_breakdown.append({
-            'name': c.name,
-            'number': Product.objects.filter(category=c).count(),
-            'url': c.get_absolute_url()
-        })
+            return query_set.filter(price__gte=minimum_price, price__lte=maximum_price)
+        except decimal.InvalidOperation:
+            return query_set
 
-    try:
-        products = paginator.page(page_number)
-    except PageNotAnInteger:
-        products = paginator.page(page_number)
-    except EmptyPage:
-        products = paginator.page(paginator.num_pages)
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        categories = Category.objects.all()
+        context['categories'] = categories
 
-    return render(request,
-                  'shop/product/list.html',
-                  {'category': category,
-                   'categories': categories,
-                   'products': products,
-                   'category_breakdown': category_breakdown,
-                   'page_numbers': [str(number) for number in range(1, paginator.num_pages + 1)],
-                   'active_page': page_number,
-                   'next_page': page_number + 1 if page_number < paginator.num_pages else paginator.num_pages})
+        # get count per category
+        category_breakdown = []
+        for c in categories:
+            category_breakdown.append({
+                'name': c.name,
+                'number': Product.objects.filter(category=c).count(),
+                'url': c.get_absolute_url()
+            })
+
+        context['category_breakdown'] = category_breakdown
+        return context
 
 
 def artist_page(request, artist_username):
@@ -85,13 +97,13 @@ class ListArtist(ListView):
         return context
 
 
-def product_detail(request, slug):
+def product_detail(request, product_slug):
     if request.user.is_authenticated:
         username = request.user.username
     else:
         username = None
     product = get_object_or_404(Product,
-                                slug=slug,
+                                slug=product_slug,
                                 available=True)
     cart_product_form = CartAddProductForm()
 
@@ -117,9 +129,8 @@ class HomeView(ListView):
         context = super().get_context_data(**kwargs)
         newsletter_response_map = {'success': 'Email added to newsletter',
                                    'exists': 'Email already subscribed to newsletter',
-                                   'failed': 'Invalid email address',
-                                   '': ''}
-        context['newsletter_response'] = newsletter_response_map[self.request.GET.get('newsletter', '')]
+                                   'failed': 'Invalid email address'}
+        context['newsletter_response'] = newsletter_response_map.get(self.request.GET.get('newsletter', ''), '')
         return context
 
 

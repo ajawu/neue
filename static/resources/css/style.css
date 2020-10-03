@@ -1278,3 +1278,10 @@ a:hover {
     width: 100%;
     max-width: 300px;
 }
+
+.price-input {
+    width: 100%;
+    max-width: 300px;
+    min-width: 50px;
+    margin: 0 auto;
+}

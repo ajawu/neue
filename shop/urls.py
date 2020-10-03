@@ -11,10 +11,10 @@ urlpatterns = [
     path('delivery/', views.delivery_view, name='delivery_fees'),
     path('terms-of-use/', views.terms_condition_view, name='terms_and_conditions'),
 
-    path('gallery/', views.product_list, name='product_list'),
-    path('category/<slug:category_slug>/', views.product_list, name='product_list_by_category'),
+    path('gallery/', views.ProductList.as_view(), name='product_list'),
+    path('gallery/<slug:product_slug>/', views.product_detail, name='product_detail'),
+    path('collection/<slug:category_slug>/', views.ProductList.as_view(), name='product_list_by_category'),
 
     path('artist/', views.ListArtist.as_view(), name='artist_list_page'),
     path('artist/<str:artist_username>/', views.artist_page, name='artist_details_page'),
-    path('product/<slug:slug>/', views.product_detail, name='product_detail'),
 ]

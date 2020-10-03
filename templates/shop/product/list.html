@@ -61,11 +61,11 @@
                                             Sort By
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
-                                            <a class="dropdown-item" href="#">Name, A to Z</a>
-                                            <a class="dropdown-item" href="#">Name, Z to A</a>
+                                            <a class="dropdown-item" href="?sortby=name&order=ascending">Name, A to Z</a>
+                                            <a class="dropdown-item" href="?sortby=name&order=descending">Name, Z to A</a>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Price, Lowest to Highest</a>
-                                            <a class="dropdown-item" href="#">Last Name, Highest to Lowest</a>
+                                            <a class="dropdown-item" href="?sortby=price&order=ascending">Price, Lowest to Highest</a>
+                                            <a class="dropdown-item" href="?sortby=price&order=descending">Price, Highest to Lowest</a>
                                         </div>
                                     </div>
                                 </div>
@@ -98,30 +98,22 @@
                             <div class="col-md-12 text-center">
                                 <div class="site-block-27">
                                     <ul>
-                                        <li><a href="{% url 'shop:product_list' %}?page=1">&lt;</a></li>
-                                        {% if active_page %}
-                                            {% for page_number in page_numbers %}
-                                                <li {% if page_number == active_page %}class="active"{% endif %}>
-                                                    <a href="{% url 'shop:product_list' %}?page={{ page_number }}">
-                                                        <span>{{ page_number }}</span>
-                                                    </a>
-                                                </li>
-                                            {% endfor %}
-                                        {% else %}
-                                            <li class="active">
-                                                <a href="{% url 'shop:product_list' %}?page=1"><span>1</span></a>
-                                            </li>
-                                            {% for page_number in page_numbers %}
-                                                {% if page_number != '1' %}
-                                                    <li>
-                                                        <a href="{% url 'shop:product_list' %}?page={{ page_number }}">
-                                                            <span>{{ page_number }}</span>
-                                                        </a>
-                                                    </li>
-                                                {% endif %}
-                                            {% endfor %}
+                                        {% if page_obj.has_previous %}
+                                            <li><a href="?page=1">&laquo;</a></li>
+                                            <li><a href="?page={{ page_obj.previous_page_number }}">&lt;</a></li>
                                         {% endif %}
-                                        <li><a href="{% url 'shop:product_list' %}?page={{ next_page }}">&gt;</a></li>
+
+                                        <li style="font-size: 1.3rem; margin: 0 5px;">
+                                            {{ page_obj.number }}
+                                        </li>
+                                        <li style="font-size: 1.3rem; margin-right: 3px;">of</li>
+                                        <li style="font-size: 1.3rem; margin: 0 5px;">
+                                            {{ page_obj.paginator.num_pages }}
+                                        </li>
+                                        {% if page_obj.has_next %}
+                                            <li><a href="?page={{ page_obj.next_page_number }}">&gt;</a></li>
+                                            <li><a href="?page={{ page_obj.paginator.num_pages }}">&raquo;</a></li>
+                                        {% endif %}
                                     </ul>
                                 </div>
                             </div>
@@ -148,8 +140,12 @@
                                 <div class="mb-4">
                                     <h3 class="mb-3 h6 text-uppercase text-black d-block">Filter by Price</h3>
                                     <div id="slider-range" class="border-primary"></div>
-                                    <input type="text" name="text" id="amount" class="form-control border-0 pl-0 bg-white"
-                                           disabled=""/>
+                                    <p class="m-b-0 m-t-17" style="color: #6b6d72; margin: 0 auto;">From</p>
+                                    <input type="text" name="minimum" id="minimum-amount"
+                                           class="form-control bg-white m-t-5 price-input" min="0" />
+                                    <p class="m-b-0 m-t-17" style="color: #6b6d72">To</p>
+                                    <input type="text" name="maximum" id="maximum-amount"
+                                           class="form-control bg-white m-t-5 price-input" min="0"/>
                                 </div>
                                 <div class="mb-4">
                                     <button type="submit" class="btn btn-sm btn-primary price-button"
