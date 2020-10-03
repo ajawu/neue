@@ -79,6 +79,11 @@ class ListArtist(ListView):
     def get_queryset(self):
         return get_user_model().objects.filter(is_an_artist=True)
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        return context
+
 
 def product_detail(request, slug):
     if request.user.is_authenticated:
@@ -104,17 +109,18 @@ def product_detail(request, slug):
                    'ratings_list': [1, 2, 3, 4, 5]})
 
 
-def home_view(request, newsletter_message=None):
-    if request.user.is_authenticated:
-        username = request.user.username
-    else:
-        username = None
-    categories = Category.objects.all()
-    return render(request,
-                  'shop/product/home.html',
-                  {'categories': categories,
-                   'username': username,
-                   'newsletter_response': newsletter_message})
+class HomeView(ListView):
+    model = Category
+    template_name = 'shop/product/home.html'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        newsletter_response_map = {'success': 'Email added to newsletter',
+                                   'exists': 'Email already subscribed to newsletter',
+                                   'failed': 'Invalid email address',
+                                   '': ''}
+        context['newsletter_response'] = newsletter_response_map[self.request.GET.get('newsletter', '')]
+        return context
 
 
 @require_GET
