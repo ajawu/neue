@@ -21,8 +21,7 @@ def create_review(request, product_id=None):
                     review.review_user = request.user
                     review.review_product = selected_product
                     review.save()
-                    return HttpResponseRedirect(reverse('shop:product_detail', args=[selected_product.id,
-                                                                                     selected_product.slug]))
+                    return HttpResponseRedirect(reverse('shop:product_detail', args=[selected_product.slug]))
                 else:
                     return render(request,
                                   'reviews/create.html',
