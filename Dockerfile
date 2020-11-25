@@ -1,18 +1,13 @@
-FROM python:3.8-alpine3.11
+FROM python:3.8-slim-buster
 ADD ./requirements.txt /app/requirements.txt
 
 RUN set -ex \
-    && apk add --no-cache --virtual .build-deps postgresql-dev build-base \
-    && python -m venv /env \
+    && apt-get update \
+    && apt-get install -y python3-pip python3-dev libpq-dev curl\
+    && pip3 install virtualenv \
+    && virtualenv env \
     && /env/bin/pip install --upgrade pip \
-    && /env/bin/pip install --no-cache-dir -r /app/requirements.txt \
-    && runDeps="$(scanelf --needed --nobanner --recursive /env \
-        | awk '{ gsub(/,/, "\nso:", $2); print "so:" $2 }' \
-        | sort -u \
-        | xargs -r apk info --installed \
-        | sort -u)" \
-    && apk add --virtual rundeps $runDeps \
-    && apk del .build-deps
+    && /env/bin/pip install --no-cache-dir -r /app/requirements.txt
 
 ADD . /app
 WORKDIR /app
