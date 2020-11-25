@@ -1,7 +1,12 @@
+boto3==1.16.22
 celery==4.4.2
-Django==3.0.8
-flower==0.9.3
-Pillow==7.0.0
+Django~=3.0
+django-allauth==0.43.0
+django-storages==1.10
 redis==3.4.1
-scipy==1.5.1
+gunicorn==20.0.4
+psycopg2==2.8.5
 WeasyPrint==51
+django_compressor~=2.4
+beautifulsoup4==4.9.3
+Brotli~=1.0.9

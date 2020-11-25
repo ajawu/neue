@@ -282,7 +282,7 @@ button.ui-button::-moz-focus-inner {
 }
 .ui-widget-header {
 	border: 1px solid #4297d7;
-	background: #5c9ccc url("images/ui-bg_gloss-wave_55_5c9ccc_500x100.png") 50% 50% repeat-x;
+	background: #5c9ccc 50% 50% repeat-x;
 	color: #ffffff;
 	font-weight: bold;
 }
