@@ -1,4 +1,4 @@
-**/migrations/*
 .idea/
 *.pyc
 todo.txt
+settings.env

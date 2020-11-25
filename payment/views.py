@@ -3,11 +3,11 @@ from django.http import HttpResponseRedirect, JsonResponse
 from django.conf import settings
 from orders.models import Order, OrderItem
 from shop.models import Category
-from .tasks import payment_completed
+# from .tasks import payment_completed
 import requests
 from decimal import Decimal
 from cart.cart import Cart
-from django.urls import reverse
+# from django.urls import reverse
 
 
 def payment_process(request):
