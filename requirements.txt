@@ -8,4 +8,4 @@ WeasyPrint~=52.1
 django_compressor~=2.4
 beautifulsoup4==4.9.3
 Brotli~=1.0.9
-celery==5.0.2
+celery==5.2.2
